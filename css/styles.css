@@ -1,16 +1,13 @@
 /* ==========================================================================
-   Campus Event Hub - Custom Styles & Animations
+   Campus Event Hub - Vibrant Collegiate Fest Aesthetic
+   Youthful, Energetic, High-Contrast Campus Life Styling
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
 
 :root {
   --font-main: 'Plus Jakarta Sans', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-  --primary-accent: #6366f1;
-  --primary-glow: rgba(99, 102, 241, 0.35);
-  --glass-bg: rgba(17, 24, 39, 0.75);
-  --glass-border: rgba(255, 255, 255, 0.08);
 }
 
 body {
@@ -19,159 +16,121 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Glassmorphism effects */
-.glass-panel {
-  background: rgba(17, 24, 39, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* Vibrant Card Hover Effects */
+.campus-card {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.light .glass-panel {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+.campus-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 30px -10px rgba(0, 0, 0, 0.4);
 }
 
-.glass-nav {
-  background: rgba(10, 15, 29, 0.82);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+/* Category Accent Glow Borders */
+.cat-border-tech:hover { border-color: #3b82f6; }
+.cat-border-cultural:hover { border-color: #ec4899; }
+.cat-border-gaming:hover { border-color: #f97316; }
+.cat-border-sports:hover { border-color: #10b981; }
+.cat-border-workshop:hover { border-color: #06b6d4; }
+.cat-border-career:hover { border-color: #eab308; }
+
+/* Category Pills with personality */
+.pill-active-tech { background: #2563eb !important; color: #fff !important; border-color: #3b82f6 !important; }
+.pill-active-cultural { background: #db2777 !important; color: #fff !important; border-color: #f472b6 !important; }
+.pill-active-gaming { background: #ea580c !important; color: #fff !important; border-color: #fb923c !important; }
+.pill-active-sports { background: #059669 !important; color: #fff !important; border-color: #34d399 !important; }
+.pill-active-workshop { background: #0891b2 !important; color: #fff !important; border-color: #22d3ee !important; }
+.pill-active-career { background: #ca8a04 !important; color: #fff !important; border-color: #facc15 !important; }
+
+/* Authentic College Fest Pass / Lanyard Badge Styling */
+.fest-pass {
+  position: relative;
+  border-radius: 20px;
+  background: #111827;
+  border: 2px solid #374151;
+  overflow: hidden;
 }
 
-.light .glass-nav {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+.light .fest-pass {
+  background: #ffffff;
+  border: 2px solid #e5e7eb;
 }
 
-/* Glowing text and ambient badges */
-.glow-primary {
-  box-shadow: 0 0 25px -4px rgba(99, 102, 241, 0.45);
+/* Lanyard punch hole at top */
+.lanyard-hole {
+  width: 44px;
+  height: 9px;
+  background: #030712;
+  border-radius: 9999px;
+  margin: 0 auto 14px auto;
+  border: 1.5px solid #4b5563;
 }
 
-.glow-amber {
-  box-shadow: 0 0 25px -4px rgba(245, 158, 11, 0.4);
+.light .lanyard-hole {
+  background: #e5e7eb;
+  border: 1.5px solid #9ca3af;
 }
 
-.glow-emerald {
-  box-shadow: 0 0 25px -4px rgba(16, 185, 129, 0.4);
+/* Perforation Ticket Divider */
+.pass-notch-l, .pass-notch-r {
+  position: absolute;
+  top: 67%;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #030712;
+  z-index: 10;
 }
 
-/* Custom Scrollbar */
+.light .pass-notch-l, .light .pass-notch-r {
+  background: #f3f4f6;
+}
+
+.pass-notch-l { left: -11px; }
+.pass-notch-r { right: -11px; }
+
+.pass-tear-line {
+  position: absolute;
+  top: 67%;
+  left: 14px;
+  right: 14px;
+  margin-top: 10px;
+  border-top: 2px dashed #4b5563;
+  z-index: 5;
+}
+
+.light .pass-tear-line {
+  border-top: 2px dashed #d1d5db;
+}
+
+/* Custom Scrollbars */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.6);
-}
-
-.light ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: rgba(0, 0, 0, 0.2);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.3);
+  background: #4b5563;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.5);
-}
-
-/* Card hover animation */
-.event-card {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.event-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.5), 0 0 20px -5px rgba(99, 102, 241, 0.2);
-}
-
-.light .event-card:hover {
-  box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.12), 0 0 20px -5px rgba(99, 102, 241, 0.15);
-}
-
-/* Hero gradient background shimmer */
-.hero-gradient {
-  background: radial-gradient(circle at 50% -20%, rgba(99, 102, 241, 0.25) 0%, rgba(139, 92, 246, 0.15) 30%, transparent 70%);
-}
-
-.light .hero-gradient {
-  background: radial-gradient(circle at 50% -20%, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.08) 30%, transparent 70%);
-}
-
-/* Ticket Design Elements */
-.ticket-wrapper {
-  position: relative;
-  background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-  overflow: hidden;
-}
-
-.ticket-notch-left,
-.ticket-notch-right {
-  position: absolute;
-  top: 68%;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: #0f172a;
-  z-index: 10;
-}
-
-.ticket-notch-left {
-  left: -12px;
-}
-
-.ticket-notch-right {
-  right: -12px;
-}
-
-.ticket-perforation {
-  position: absolute;
-  top: 68%;
-  left: 12px;
-  right: 12px;
-  margin-top: 11px;
-  border-top: 2px dashed rgba(255, 255, 255, 0.2);
-  z-index: 5;
-}
-
-.hologram-strip {
-  background: linear-gradient(90deg, 
-    rgba(255, 255, 255, 0) 0%, 
-    rgba(255, 0, 128, 0.3) 25%, 
-    rgba(0, 255, 255, 0.3) 50%, 
-    rgba(255, 255, 0, 0.3) 75%, 
-    rgba(255, 255, 255, 0) 100%
-  );
-  background-size: 200% 100%;
-  animation: hologramSlide 4s linear infinite;
-}
-
-@keyframes hologramSlide {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  background: #6b7280;
 }
 
 /* Modal Animations */
-.modal-enter {
-  animation: modalScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.campus-modal-in {
+  animation: modalScale 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes modalScaleIn {
+@keyframes modalScale {
   0% {
     opacity: 0;
-    transform: scale(0.94) translateY(12px);
+    transform: scale(0.96) translateY(10px);
   }
   100% {
     opacity: 1;
@@ -179,29 +138,7 @@ body {
   }
 }
 
-/* Live pulse animation */
-@keyframes pulseDot {
-  0% {
-    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
-  }
-}
-
-.pulse-dot {
-  animation: pulseDot 2s infinite;
-}
-
-/* Code badge font */
-.font-mono-code {
-  font-family: var(--font-mono);
-}
-
-/* Print styles for digital ticket pass */
+/* Print View for physical festival pass */
 @media print {
   body * {
     visibility: hidden;
@@ -215,11 +152,11 @@ body {
     top: 50%;
     transform: translate(-50%, -50%);
     width: 90% !important;
-    max-width: 600px !important;
+    max-width: 520px !important;
+    background: #ffffff !important;
+    color: #111827 !important;
+    border: 3px solid #111827 !important;
     box-shadow: none !important;
-    border: 2px solid #000 !important;
-    color: #000 !important;
-    background: #fff !important;
   }
   .no-print {
     display: none !important;

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CampusVibe | College Event Hub & Registration Portal</title>
-  <meta name="description" content="Discover, register, and experience college hackathons, cultural fests, gaming tournaments, and workshops." />
+  <title>CampusVibe | Official College Event Hub & Fest Pass</title>
+  <meta name="description" content="Discover, register, and experience college hackathons, cultural festivals, esports tournaments, and workshops." />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -13,27 +13,22 @@
       darkMode: 'class',
       theme: {
         extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
           colors: {
-            brand: {
-              50: '#eef2ff',
-              100: '#e0e7ff',
-              200: '#c7d2fe',
-              300: '#a5b4fc',
-              400: '#818cf8',
-              500: '#6366f1',
-              600: '#4f46e5',
-              700: '#4338ca',
-              800: '#3730a3',
-              900: '#312e81',
-              950: '#1e1b4b',
-            },
-            surface: {
-              dark: '#0B0F19',
-              cardDark: '#111827',
-              borderDark: 'rgba(255, 255, 255, 0.08)',
-              light: '#F8FAFC',
-              cardLight: '#FFFFFF',
-              borderLight: 'rgba(0, 0, 0, 0.08)',
+            campus: {
+              dark: '#0B101B',
+              card: '#131B2E',
+              border: 'rgba(255, 255, 255, 0.08)',
+              subtle: '#1E293B',
+              tech: '#3B82F6',
+              cultural: '#EC4899',
+              gaming: '#F97316',
+              sports: '#10B981',
+              workshop: '#06B6D4',
+              career: '#F59E0B',
             }
           }
         }
@@ -50,30 +45,28 @@
   <!-- QRCode.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-  <!-- Custom Styles -->
+  <!-- Custom Campus Styles -->
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 
-<body class="bg-[#0B0F19] text-slate-100 min-h-screen antialiased transition-colors duration-300 selection:bg-brand-500 selection:text-white">
+<body class="bg-[#0B101B] text-slate-100 min-h-screen antialiased selection:bg-orange-500 selection:text-white transition-colors duration-200">
 
   <!-- =========================================================================
-       LIVE CAMPUS TICKER BAR
+       CAMPUS LIVE PULSE TICKER
        ========================================================================= -->
-  <div class="bg-gradient-to-r from-brand-900 via-indigo-900 to-slate-900 border-b border-brand-500/20 py-1.5 px-4 text-xs font-medium text-slate-300 overflow-hidden relative">
+  <div class="bg-gradient-to-r from-blue-900 via-indigo-900 to-rose-900 border-b border-white/10 py-2 px-4 text-xs font-semibold text-white overflow-hidden shadow-sm">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <div class="flex items-center gap-2 overflow-hidden">
-        <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-red-500/20 text-red-400 font-semibold text-[10px] uppercase tracking-wider shrink-0">
-          <span class="w-1.5 h-1.5 rounded-full bg-red-500 pulse-dot"></span>
-          Campus Live
+        <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-red-500 text-white text-[10px] uppercase font-black tracking-wider shrink-0 shadow-sm animate-pulse">
+          CAMPUS LIVE
         </span>
-        <div id="liveTickerText" class="truncate transition-opacity duration-300 font-mono-code text-[11px] text-brand-200">
+        <div id="liveTickerText" class="truncate transition-opacity duration-300 font-medium text-amber-200 text-xs">
           🔥 1,420+ registrations logged • ⚡ HACK-CAMPUS 2026 registration closing in 48 hours!
         </div>
       </div>
-      <div class="hidden sm:flex items-center gap-4 text-slate-400 text-[11px] shrink-0">
-        <span>📍 Main Campus • Term 1 / Fall 2026</span>
-        <span class="text-slate-600">|</span>
-        <span id="currentTimeDisplay" class="font-mono-code text-slate-300">12:00 PM</span>
+      <div class="hidden sm:flex items-center gap-3 text-slate-200 text-xs shrink-0">
+        <span class="px-2 py-0.5 rounded bg-black/30">📍 Term 1 / Fall 2026</span>
+        <span id="currentTimeDisplay" class="font-mono text-amber-300 font-bold">12:00 PM</span>
       </div>
     </div>
   </div>
@@ -81,94 +74,94 @@
   <!-- =========================================================================
        TOP NAVIGATION BAR
        ========================================================================= -->
-  <header class="sticky top-0 z-40 glass-nav border-b border-white/5 transition-all">
+  <header class="sticky top-0 z-40 bg-[#0B101B]/95 backdrop-blur-md border-b border-slate-800 transition-all">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
       
       <!-- Brand Logo -->
-      <a href="#" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-violet-500 flex items-center justify-center text-white shadow-lg shadow-brand-500/30 group-hover:scale-105 transition-transform">
+      <a href="#" class="flex items-center gap-2.5 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-500 via-rose-500 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-orange-500/20 group-hover:scale-105 transition-transform">
           <i data-lucide="sparkles" class="w-5 h-5"></i>
         </div>
         <div>
           <div class="flex items-center gap-1.5">
-            <span class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-white via-slate-100 to-brand-300 bg-clip-text text-transparent">CampusVibe</span>
-            <span class="px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-brand-500/20 text-brand-400 border border-brand-500/30 rounded">Hub</span>
+            <span class="font-black text-xl tracking-tight bg-gradient-to-r from-orange-400 via-rose-400 to-indigo-300 bg-clip-text text-transparent">CampusVibe</span>
+            <span class="px-1.5 py-0.5 text-[9px] font-extrabold uppercase bg-orange-500 text-white rounded">FEST '26</span>
           </div>
-          <p class="text-[10px] text-slate-400 tracking-wide font-medium">Official Event & Fest Portal</p>
+          <p class="text-[10px] text-slate-400 tracking-wide font-medium">Official College Event Hub</p>
         </div>
       </a>
 
-      <!-- Quick Search Bar (Desktop) -->
+      <!-- Quick Search Bar -->
       <div class="hidden md:flex flex-1 max-w-md mx-4 relative">
         <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
         <input 
           type="text" 
           id="globalSearchInput"
-          placeholder="Search events, clubs, hackathons, sports... (Ctrl + K)" 
-          class="w-full pl-10 pr-12 py-2 text-xs bg-slate-900/80 border border-slate-700/60 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all shadow-inner"
+          placeholder="Search hackathons, DJ nights, esports, sports... (Ctrl + K)" 
+          class="w-full pl-10 pr-12 py-2 text-xs bg-slate-900 border border-slate-700/80 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:border-orange-500 transition-colors shadow-inner"
         />
-        <kbd class="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono-code px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">⌘K</kbd>
+        <kbd class="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">⌘K</kbd>
       </div>
 
-      <!-- Nav Items & Action Controls -->
+      <!-- Action Items -->
       <div class="flex items-center gap-2 sm:gap-3">
         
-        <!-- Navigation Tabs -->
+        <!-- Navigation View Tabs -->
         <nav class="hidden lg:flex items-center gap-1 text-xs font-semibold">
-          <button id="navExploreBtn" class="px-3 py-2 rounded-lg text-brand-400 bg-brand-500/10 font-medium transition-colors">
+          <button id="navExploreBtn" class="px-3.5 py-2 rounded-xl text-white bg-slate-800 font-bold border border-slate-700 transition-colors">
             Explore Events
           </button>
-          <button id="navScheduleBtn" class="px-3 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-colors">
-            Calendar Schedule
+          <button id="navScheduleBtn" class="px-3.5 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+            Schedule View
           </button>
         </nav>
 
-        <!-- My Pass Wallet Button -->
+        <!-- My Passes Wallet Button -->
         <button 
           id="openWalletBtn" 
-          class="relative flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-slate-200 text-xs font-semibold transition-all hover:border-slate-600 shadow-sm"
+          class="relative flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 text-xs font-bold transition-all shadow-sm"
           title="View your registered event passes"
         >
-          <i data-lucide="ticket" class="w-4 h-4 text-brand-400"></i>
+          <i data-lucide="ticket" class="w-4 h-4 text-orange-400"></i>
           <span class="hidden sm:inline">My Passes</span>
-          <span id="walletCountBadge" class="ml-0.5 px-1.5 py-0.2 rounded-full text-[10px] bg-brand-500 text-white font-bold">0</span>
+          <span id="walletCountBadge" class="ml-1 px-1.5 py-0.2 rounded-full text-[10px] bg-orange-500 text-white font-mono font-bold">0</span>
         </button>
 
         <!-- Host an Event (Organizer Mode Button) -->
         <button 
           id="openHostEventBtn"
-          class="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white text-xs font-bold transition-all shadow-md shadow-brand-500/20 active:scale-95"
+          class="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-orange-500 to-rose-600 hover:from-orange-600 hover:to-rose-700 text-white text-xs font-extrabold transition-all shadow-md shadow-orange-500/20 active:scale-95"
         >
           <i data-lucide="plus-circle" class="w-4 h-4"></i>
           <span>+ Host Event</span>
         </button>
 
-        <!-- Sound FX Mute Toggle -->
+        <!-- Audio Toggle -->
         <button 
           id="toggleSoundBtn"
-          class="p-2 rounded-xl bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 text-slate-300 hover:text-white transition-all"
-          title="Toggle UI Sound Effects"
+          class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 hover:text-white transition-colors"
+          title="Toggle Sound Effects"
         >
           <i data-lucide="volume-2" id="soundIcon" class="w-4 h-4"></i>
         </button>
 
-        <!-- Theme Toggle (Dark/Light) -->
+        <!-- Theme Toggle -->
         <button 
           id="themeToggleBtn"
-          class="p-2 rounded-xl bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 text-slate-300 hover:text-white transition-all"
-          title="Toggle Theme"
+          class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 hover:text-white transition-colors"
+          title="Toggle Light/Dark Theme"
         >
           <i data-lucide="sun" id="themeIcon" class="w-4 h-4"></i>
         </button>
 
-        <!-- Mock Student Profile Pill -->
-        <div class="hidden xl:flex items-center gap-2 pl-2 border-l border-slate-800">
-          <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center font-bold text-xs text-slate-900 ring-2 ring-emerald-500/30">
+        <!-- Student Profile Pill -->
+        <div class="hidden xl:flex items-center gap-2.5 pl-2 border-l border-slate-800">
+          <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-400 to-orange-500 flex items-center justify-center font-black text-xs text-slate-950 ring-2 ring-orange-500/30">
             AV
           </div>
-          <div class="text-left leading-tight">
-            <div class="text-xs font-semibold text-slate-200">Aryan Verma</div>
-            <div class="text-[10px] text-slate-400 font-mono-code">#24BCS108</div>
+          <div class="text-left leading-tight text-xs">
+            <div class="font-bold text-slate-200">Aryan Verma</div>
+            <div class="text-[10px] text-slate-400 font-mono">#24BCS108</div>
           </div>
         </div>
 
@@ -177,229 +170,215 @@
   </header>
 
   <!-- =========================================================================
-       HERO SHOWCASE SECTION WITH COUNTDOWN
+       HERO SHOWCASE SECTION (Colorful, Authentic, Youthful Energy)
        ========================================================================= -->
-  <section class="relative pt-8 pb-12 overflow-hidden hero-gradient border-b border-slate-800/80">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+  <section class="relative pt-8 pb-10 border-b border-slate-800 bg-gradient-to-b from-[#131B2E] via-[#0B101B] to-[#0B101B]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <!-- Top Badges & Announcement -->
+      <!-- Badges Row -->
       <div class="flex flex-wrap items-center justify-center gap-2 mb-4">
-        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-brand-500/10 text-brand-300 border border-brand-500/30 shadow-sm">
-          <i data-lucide="zap" class="w-3.5 h-3.5 text-brand-400"></i>
-          Fall Festivities 2026 • Live Registration System
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-orange-500/15 text-orange-400 border border-orange-500/30">
+          <i data-lucide="zap" class="w-3.5 h-3.5 text-orange-400"></i>
+          Campus Festivities 2026
         </span>
-        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">
-          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i>
-          Official Dean of Student Welfare Verified
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+          <i data-lucide="badge-check" class="w-3.5 h-3.5 text-emerald-400"></i>
+          Dean of Student Welfare Verified
         </span>
       </div>
 
       <!-- Main Catchphrase -->
       <div class="text-center max-w-3xl mx-auto mb-8">
-        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-3">
-          Discover & Register for the <br class="hidden sm:inline" />
-          <span class="bg-gradient-to-r from-brand-400 via-indigo-300 to-pink-400 bg-clip-text text-transparent">
-            Hottest Campus Events
+        <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white mb-3">
+          Experience the Beat of <br class="hidden sm:inline" />
+          <span class="bg-gradient-to-r from-orange-400 via-rose-400 to-indigo-400 bg-clip-text text-transparent">
+            College Life & Competitions
           </span>
         </h1>
-        <p class="text-sm sm:text-base text-slate-400 leading-relaxed max-w-2xl mx-auto">
-          From high-stakes hackathons and battle-of-the-bands to esports leagues and robotics derby. Never miss an event, secure your digital entry QR pass in seconds.
+        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-2xl mx-auto font-medium">
+          The ultimate student hub for 36-hour hackathons, battle of bands, LAN gaming, cricket championships, and venture pitch tanks. Register in seconds and unlock your digital entry pass!
         </p>
       </div>
 
-      <!-- Campus Live Metric Cards -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto mb-10">
-        <div class="glass-panel p-3.5 rounded-2xl text-center">
-          <div class="text-2xl font-extrabold text-white" id="statEventsCount">8</div>
-          <div class="text-[11px] font-medium text-slate-400">Active Events</div>
+      <!-- Colorful Campus Stats Bar -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-4xl mx-auto mb-8">
+        <div class="bg-slate-900/90 border border-blue-500/30 p-4 rounded-2xl text-center shadow-lg">
+          <div class="text-2xl font-black text-blue-400 font-mono" id="statEventsCount">8</div>
+          <div class="text-xs font-bold text-slate-300 mt-0.5">Live Events</div>
         </div>
-        <div class="glass-panel p-3.5 rounded-2xl text-center">
-          <div class="text-2xl font-extrabold text-brand-400">₹4.5L+</div>
-          <div class="text-[11px] font-medium text-slate-400">Total Prize Pool</div>
+        <div class="bg-slate-900/90 border border-amber-500/30 p-4 rounded-2xl text-center shadow-lg">
+          <div class="text-2xl font-black text-amber-400 font-mono">₹4,50,000</div>
+          <div class="text-xs font-bold text-slate-300 mt-0.5">Total Prize Pool</div>
         </div>
-        <div class="glass-panel p-3.5 rounded-2xl text-center">
-          <div class="text-2xl font-extrabold text-emerald-400">1,930+</div>
-          <div class="text-[11px] font-medium text-slate-400">Confirmed Attendees</div>
+        <div class="bg-slate-900/90 border border-emerald-500/30 p-4 rounded-2xl text-center shadow-lg">
+          <div class="text-2xl font-black text-emerald-400 font-mono">1,930+</div>
+          <div class="text-xs font-bold text-slate-300 mt-0.5">Registered Students</div>
         </div>
-        <div class="glass-panel p-3.5 rounded-2xl text-center">
-          <div class="text-2xl font-extrabold text-purple-400">12</div>
-          <div class="text-[11px] font-medium text-slate-400">Recognized Clubs</div>
+        <div class="bg-slate-900/90 border border-pink-500/30 p-4 rounded-2xl text-center shadow-lg">
+          <div class="text-2xl font-black text-pink-400 font-mono">12</div>
+          <div class="text-xs font-bold text-slate-300 mt-0.5">Campus Societies</div>
         </div>
       </div>
 
-      <!-- FEATURED FLAGSHIP EVENT SPOTLIGHT CARD -->
-      <div id="featuredHeroCard" class="relative rounded-3xl overflow-hidden border border-brand-500/30 shadow-2xl bg-gradient-to-b from-slate-900/90 to-brand-950/40">
-        <div class="absolute inset-0 bg-cover bg-center opacity-25 filter blur-sm transition-transform duration-700" style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80');"></div>
-        <div class="relative p-6 sm:p-8 md:p-10 flex flex-col lg:flex-row items-center justify-between gap-8">
-          
-          <div class="max-w-xl text-left">
-            <div class="flex items-center gap-2 mb-3">
-              <span class="px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1.5">
-                <i data-lucide="flame" class="w-3.5 h-3.5 text-amber-400"></i>
-                Flagship Headline Event
-              </span>
-              <span class="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-brand-500/20 text-brand-300 border border-brand-500/30">
-                Google Developer Student Club
-              </span>
+      <!-- FEATURED FLAGSHIP EVENT BANNER CARD -->
+      <div id="featuredHeroCard" class="relative rounded-3xl overflow-hidden border-2 border-orange-500/40 shadow-2xl bg-gradient-to-r from-slate-950 via-slate-900 to-indigo-950/80 p-6 sm:p-8 flex flex-col lg:flex-row items-center justify-between gap-6">
+        
+        <div class="max-w-xl text-left">
+          <div class="flex items-center gap-2 mb-2 flex-wrap">
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-orange-500 text-white shadow-sm flex items-center gap-1">
+              <i data-lucide="flame" class="w-3 h-3"></i>
+              FLAGSHIP HEADLINER
+            </span>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-500/20 text-blue-300 border border-blue-500/40">
+              Google Developer Student Club
+            </span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black text-white mb-2 leading-tight">
+            HACK-CAMPUS 2026: 36h National Flagship Hackathon
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-300 mb-4 line-clamp-2 leading-relaxed">
+            Build futuristic AI, Web3, & IoT solutions. 36 hours of non-stop code, caffeine, mentorship, midnight pizza, and ₹1,50,000 cash prizes!
+          </p>
+          <div class="flex flex-wrap items-center gap-4 text-xs font-semibold text-slate-200 mb-6">
+            <div class="flex items-center gap-1.5">
+              <i data-lucide="calendar" class="w-4 h-4 text-orange-400"></i>
+              <span>Nov 6 - Nov 8, 2026</span>
             </div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2 leading-tight">
-              HACK-CAMPUS 2026: 36h National Flagship Hackathon
-            </h2>
-            <p class="text-xs sm:text-sm text-slate-300 mb-4 line-clamp-2">
-              Build futuristic AI, Web3, & IoT solutions. 36 hours of non-stop code, caffeine, mentorship, and ₹1,50,000 in cash prizes.
-            </p>
-            <div class="flex flex-wrap items-center gap-4 text-xs text-slate-300 font-medium mb-6">
-              <div class="flex items-center gap-1.5">
-                <i data-lucide="calendar" class="w-4 h-4 text-brand-400"></i>
-                <span>Nov 6 - Nov 8, 2026</span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <i data-lucide="map-pin" class="w-4 h-4 text-brand-400"></i>
-                <span>Main Campus Auditorium</span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <i data-lucide="trophy" class="w-4 h-4 text-amber-400"></i>
-                <span>₹1,50,000 Prizes</span>
-              </div>
+            <div class="flex items-center gap-1.5">
+              <i data-lucide="map-pin" class="w-4 h-4 text-orange-400"></i>
+              <span>Main Auditorium & Computer Labs</span>
             </div>
-            <div class="flex flex-wrap items-center gap-3">
-              <button 
-                onclick="App.openRegistrationModal('ev-01')"
-                class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-brand-500/30 hover:shadow-brand-500/50 transition-all active:scale-95"
-              >
-                <i data-lucide="check-circle-2" class="w-4 h-4"></i>
-                <span>Instant Registration</span>
-              </button>
-              <button 
-                onclick="App.openEventDetailsModal('ev-01')"
-                class="px-5 py-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-200 font-semibold text-xs sm:text-sm flex items-center gap-2 transition-all"
-              >
-                <i data-lucide="info" class="w-4 h-4 text-slate-400"></i>
-                <span>View Full Agenda</span>
-              </button>
+            <div class="flex items-center gap-1.5">
+              <i data-lucide="trophy" class="w-4 h-4 text-amber-400"></i>
+              <span>₹1,50,000 Cash Pool</span>
             </div>
           </div>
-
-          <!-- Live Countdown Box -->
-          <div class="w-full lg:w-auto glass-panel p-6 rounded-2xl border border-white/10 text-center shrink-0">
-            <div class="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-3 flex items-center justify-center gap-1.5">
-              <i data-lucide="clock" class="w-3.5 h-3.5 text-brand-400"></i>
-              Event Starts In
-            </div>
-            <div class="grid grid-cols-4 gap-2 text-center">
-              <div class="bg-slate-900/90 border border-slate-800 px-3 py-2.5 rounded-xl min-w-[60px]">
-                <span id="countdownDays" class="text-2xl font-black text-white font-mono-code">11</span>
-                <span class="block text-[9px] uppercase tracking-wider text-slate-400 mt-0.5">Days</span>
-              </div>
-              <div class="bg-slate-900/90 border border-slate-800 px-3 py-2.5 rounded-xl min-w-[60px]">
-                <span id="countdownHours" class="text-2xl font-black text-white font-mono-code">05</span>
-                <span class="block text-[9px] uppercase tracking-wider text-slate-400 mt-0.5">Hours</span>
-              </div>
-              <div class="bg-slate-900/90 border border-slate-800 px-3 py-2.5 rounded-xl min-w-[60px]">
-                <span id="countdownMins" class="text-2xl font-black text-brand-400 font-mono-code">28</span>
-                <span class="block text-[9px] uppercase tracking-wider text-slate-400 mt-0.5">Mins</span>
-              </div>
-              <div class="bg-slate-900/90 border border-slate-800 px-3 py-2.5 rounded-xl min-w-[60px]">
-                <span id="countdownSecs" class="text-2xl font-black text-red-400 font-mono-code">44</span>
-                <span class="block text-[9px] uppercase tracking-wider text-slate-400 mt-0.5">Secs</span>
-              </div>
-            </div>
-            <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
-              <span>Spots Remaining:</span>
-              <span class="font-bold text-emerald-400">32 / 250 Left</span>
-            </div>
+          <div class="flex flex-wrap items-center gap-3">
+            <button 
+              onclick="App.openRegistrationModal('ev-01')"
+              class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-rose-600 hover:from-orange-600 hover:to-rose-700 text-white font-black text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-orange-500/30 transition-all active:scale-95"
+            >
+              <i data-lucide="ticket" class="w-4 h-4"></i>
+              <span>Instant Registration</span>
+            </button>
+            <button 
+              onclick="App.openEventDetailsModal('ev-01')"
+              class="px-5 py-2.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 border border-slate-700 text-slate-200 font-bold text-xs sm:text-sm flex items-center gap-2 transition-all"
+            >
+              <i data-lucide="info" class="w-4 h-4 text-slate-400"></i>
+              <span>View Full Agenda</span>
+            </button>
           </div>
-
         </div>
+
+        <!-- Live Countdown Timer Box -->
+        <div class="w-full lg:w-auto bg-slate-900/95 p-5 sm:p-6 rounded-2xl border border-slate-700 text-center shrink-0 shadow-xl">
+          <div class="text-[11px] font-black text-orange-400 uppercase tracking-widest mb-3 flex items-center justify-center gap-1.5">
+            <i data-lucide="clock" class="w-3.5 h-3.5 text-orange-400"></i>
+            HACKATHON COMMENCES IN
+          </div>
+          <div class="grid grid-cols-4 gap-2 text-center">
+            <div class="bg-black/60 border border-slate-800 px-3 py-2.5 rounded-xl min-w-[58px]">
+              <span id="countdownDays" class="text-2xl font-black text-white font-mono">11</span>
+              <span class="block text-[9px] uppercase tracking-wider text-slate-400 mt-0.5">Days</span>
+            </div>
+            <div class="bg-black/60 border border-slate-800 px-3 py-2.5 rounded-xl min-w-[58px]">
+              <span id="countdownHours" class="text-2xl font-black text-white font-mono">05</span>
+              <span class="block text-[9px] uppercase tracking-wider text-slate-400 mt-0.5">Hours</span>
+            </div>
+            <div class="bg-black/60 border border-slate-800 px-3 py-2.5 rounded-xl min-w-[58px]">
+              <span id="countdownMins" class="text-2xl font-black text-orange-400 font-mono">28</span>
+              <span class="block text-[9px] uppercase tracking-wider text-slate-400 mt-0.5">Mins</span>
+            </div>
+            <div class="bg-black/60 border border-slate-800 px-3 py-2.5 rounded-xl min-w-[58px]">
+              <span id="countdownSecs" class="text-2xl font-black text-rose-400 font-mono">44</span>
+              <span class="block text-[9px] uppercase tracking-wider text-slate-400 mt-0.5">Secs</span>
+            </div>
+          </div>
+          <div class="mt-3 pt-2.5 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+            <span>Remaining Capacity:</span>
+            <span class="font-bold text-emerald-400">32 / 250 Left</span>
+          </div>
+        </div>
+
       </div>
 
     </div>
   </section>
 
   <!-- =========================================================================
-       DISCOVERY TOOLBAR & FILTERS
+       DISCOVERY FILTERS (Colorful Category Pills & Controls)
        ========================================================================= -->
-  <section class="py-6 border-b border-slate-800/80 bg-slate-950/40 sticky top-16 z-30 backdrop-blur-md">
+  <section class="py-5 border-b border-slate-800 bg-[#0B101B]/95 sticky top-16 z-30 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <!-- Category Pills Horizontal Scroll -->
-      <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none no-scrollbar" id="categoryPillContainer">
-        <button data-category="all" class="category-pill active-pill px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap bg-brand-600 text-white shadow-md shadow-brand-500/20 transition-all flex items-center gap-1.5">
-          <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
-          <span>All Events</span>
-          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-white/20 ml-1" id="catCountAll">8</span>
+      <!-- Category Pills -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none" id="categoryPillContainer">
+        <button data-category="all" class="category-pill active-pill px-4 py-2 rounded-xl text-xs font-black whitespace-nowrap bg-orange-500 text-white shadow-md shadow-orange-500/20 transition-all flex items-center gap-1.5">
+          <span>🌟 All Events</span>
+          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-white/25 ml-1 font-mono" id="catCountAll">8</span>
         </button>
-        <button data-category="tech" class="category-pill px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap bg-slate-800/80 hover:bg-slate-800 text-slate-300 border border-slate-700/60 transition-all flex items-center gap-1.5">
-          <i data-lucide="code-2" class="w-3.5 h-3.5 text-blue-400"></i>
-          <span>Tech & Coding</span>
-          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-slate-700 ml-1" id="catCountTech">2</span>
+        <button data-category="tech" class="category-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-slate-900 hover:bg-slate-800 text-blue-400 border border-blue-500/30 transition-all flex items-center gap-1.5">
+          <span>💻 Tech & Coding</span>
+          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-blue-500/20 font-mono" id="catCountTech">2</span>
         </button>
-        <button data-category="cultural" class="category-pill px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap bg-slate-800/80 hover:bg-slate-800 text-slate-300 border border-slate-700/60 transition-all flex items-center gap-1.5">
-          <i data-lucide="music" class="w-3.5 h-3.5 text-purple-400"></i>
-          <span>Cultural & Arts</span>
-          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-slate-700 ml-1" id="catCountCultural">2</span>
+        <button data-category="cultural" class="category-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-slate-900 hover:bg-slate-800 text-pink-400 border border-pink-500/30 transition-all flex items-center gap-1.5">
+          <span>🎸 Cultural & Bands</span>
+          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-pink-500/20 font-mono" id="catCountCultural">2</span>
         </button>
-        <button data-category="gaming" class="category-pill px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap bg-slate-800/80 hover:bg-slate-800 text-slate-300 border border-slate-700/60 transition-all flex items-center gap-1.5">
-          <i data-lucide="gamepad-2" class="w-3.5 h-3.5 text-red-400"></i>
-          <span>E-Sports & Gaming</span>
-          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-slate-700 ml-1" id="catCountGaming">1</span>
+        <button data-category="gaming" class="category-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-slate-900 hover:bg-slate-800 text-orange-400 border border-orange-500/30 transition-all flex items-center gap-1.5">
+          <span>🎮 E-Sports League</span>
+          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-orange-500/20 font-mono" id="catCountGaming">1</span>
         </button>
-        <button data-category="sports" class="category-pill px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap bg-slate-800/80 hover:bg-slate-800 text-slate-300 border border-slate-700/60 transition-all flex items-center gap-1.5">
-          <i data-lucide="trophy" class="w-3.5 h-3.5 text-amber-400"></i>
-          <span>Sports & Fitness</span>
-          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-slate-700 ml-1" id="catCountSports">1</span>
+        <button data-category="sports" class="category-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-emerald-500/30 transition-all flex items-center gap-1.5">
+          <span>🏏 Sports & Cricket</span>
+          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-emerald-500/20 font-mono" id="catCountSports">1</span>
         </button>
-        <button data-category="workshop" class="category-pill px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap bg-slate-800/80 hover:bg-slate-800 text-slate-300 border border-slate-700/60 transition-all flex items-center gap-1.5">
-          <i data-lucide="brain-circuit" class="w-3.5 h-3.5 text-emerald-400"></i>
-          <span>Workshops & AI</span>
-          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-slate-700 ml-1" id="catCountWorkshop">1</span>
+        <button data-category="workshop" class="category-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-slate-900 hover:bg-slate-800 text-cyan-400 border border-cyan-500/30 transition-all flex items-center gap-1.5">
+          <span>🤖 AI Workshops</span>
+          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-cyan-500/20 font-mono" id="catCountWorkshop">1</span>
         </button>
-        <button data-category="career" class="category-pill px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap bg-slate-800/80 hover:bg-slate-800 text-slate-300 border border-slate-700/60 transition-all flex items-center gap-1.5">
-          <i data-lucide="briefcase" class="w-3.5 h-3.5 text-cyan-400"></i>
-          <span>E-Cell & Pitching</span>
-          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-slate-700 ml-1" id="catCountCareer">1</span>
+        <button data-category="career" class="category-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-slate-900 hover:bg-slate-800 text-amber-300 border border-amber-500/30 transition-all flex items-center gap-1.5">
+          <span>🚀 Shark Tank & E-Cell</span>
+          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-amber-500/20 font-mono" id="catCountCareer">1</span>
         </button>
       </div>
 
-      <!-- Secondary Filters & View Switcher Row -->
-      <div class="mt-4 flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-800/60">
+      <!-- Controls Row -->
+      <div class="mt-3 flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-800">
         
-        <div class="flex flex-wrap items-center gap-2 text-xs">
-          <!-- Pricing Filter -->
-          <select id="pricingFilterSelect" class="bg-slate-800/90 border border-slate-700 text-slate-200 rounded-xl px-3 py-1.5 focus:outline-none focus:border-brand-500">
-            <option value="all">All Pricing</option>
+        <div class="flex flex-wrap items-center gap-2 text-xs font-medium">
+          <select id="pricingFilterSelect" class="bg-slate-900 border border-slate-700 text-slate-200 rounded-xl px-3 py-1.5 focus:outline-none focus:border-orange-500">
+            <option value="all">All Fees</option>
             <option value="free">Free Events Only</option>
-            <option value="paid">Team / Paid Only</option>
+            <option value="paid">Team / Paid Events</option>
           </select>
 
-          <!-- Sorting Option -->
-          <select id="sortOrderSelect" class="bg-slate-800/90 border border-slate-700 text-slate-200 rounded-xl px-3 py-1.5 focus:outline-none focus:border-brand-500">
-            <option value="date-asc">Date: Soonest First</option>
+          <select id="sortOrderSelect" class="bg-slate-900 border border-slate-700 text-slate-200 rounded-xl px-3 py-1.5 focus:outline-none focus:border-orange-500">
+            <option value="date-asc">Date: Upcoming First</option>
             <option value="popularity">Most Popular / Seats</option>
             <option value="name">Alphabetical (A-Z)</option>
           </select>
 
-          <!-- Bookmarked Toggle Button -->
           <button 
             id="filterBookmarksBtn" 
-            class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700 text-slate-300 hover:text-white transition-all text-xs font-medium"
-            title="Show only bookmarked events"
+            class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 hover:text-white transition-all text-xs font-bold"
           >
-            <i data-lucide="heart" class="w-3.5 h-3.5 text-rose-400"></i>
+            <i data-lucide="heart" class="w-3.5 h-3.5 text-rose-500"></i>
             <span>Favorites</span>
-            <span id="bookmarkCountBadge" class="ml-1 text-[10px] px-1.5 py-0.2 rounded-full bg-slate-700 text-slate-300">0</span>
+            <span id="bookmarkCountBadge" class="ml-1 text-[10px] px-1.5 py-0.2 rounded-full bg-slate-800 text-rose-300 font-mono">0</span>
           </button>
         </div>
 
-        <!-- View Mode Switcher (Grid vs Timeline) -->
-        <div class="flex items-center gap-1 bg-slate-800/80 p-1 rounded-xl border border-slate-700/60">
-          <button id="viewGridBtn" class="px-3 py-1 rounded-lg text-xs font-semibold bg-brand-600 text-white flex items-center gap-1.5 transition-all">
+        <!-- View Switcher -->
+        <div class="flex items-center gap-1 bg-slate-900 p-1 rounded-xl border border-slate-700">
+          <button id="viewGridBtn" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-orange-500 text-white flex items-center gap-1.5 transition-all shadow-sm">
             <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
-            <span class="hidden sm:inline">Grid</span>
+            <span>Grid</span>
           </button>
-          <button id="viewTimelineBtn" class="px-3 py-1 rounded-lg text-xs font-semibold text-slate-400 hover:text-white flex items-center gap-1.5 transition-all">
+          <button id="viewTimelineBtn" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white flex items-center gap-1.5 transition-all">
             <i data-lucide="calendar-days" class="w-3.5 h-3.5"></i>
-            <span class="hidden sm:inline">Schedule</span>
+            <span>Timeline</span>
           </button>
         </div>
 
@@ -409,47 +388,47 @@
   </section>
 
   <!-- =========================================================================
-       MAIN EVENT LISTING CONTAINER
+       MAIN EVENT LISTING (Vibrant Cards Container)
        ========================================================================= -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 min-h-[600px]">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-[500px]">
     
-    <!-- GRID VIEW -->
+    <!-- GRID CONTAINER -->
     <div id="eventsGridContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Dynamically filled by app.js -->
+      <!-- Injected by app.js -->
     </div>
 
-    <!-- CALENDAR / TIMELINE VIEW (Hidden by default) -->
-    <div id="eventsTimelineContainer" class="hidden space-y-6">
-      <div class="glass-panel p-6 rounded-3xl border border-slate-800">
+    <!-- TIMELINE CONTAINER -->
+    <div id="eventsTimelineContainer" class="hidden space-y-4">
+      <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 shadow-xl">
         <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
           <div>
             <h3 class="text-xl font-bold text-white flex items-center gap-2">
-              <i data-lucide="calendar" class="w-5 h-5 text-brand-400"></i>
-              Campus Master Event Schedule
+              <i data-lucide="calendar" class="w-5 h-5 text-orange-400"></i>
+              Chronological Event Agenda
             </h3>
-            <p class="text-xs text-slate-400 mt-1">Chronological agenda of all upcoming university activities and festivals.</p>
+            <p class="text-xs text-slate-400 mt-0.5">Upcoming college activities arranged by date.</p>
           </div>
-          <button onclick="App.exportAllEventsToCalendar()" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-medium text-slate-200 flex items-center gap-1.5">
+          <button onclick="App.exportAllEventsToCalendar()" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 border border-slate-700 flex items-center gap-1.5">
             <i data-lucide="download" class="w-3.5 h-3.5"></i>
             <span>Export Master .ICS</span>
           </button>
         </div>
-        <div id="timelineEventsList" class="relative border-l-2 border-brand-500/30 ml-4 space-y-8 pl-6">
-          <!-- Dynamically populated -->
+        <div id="timelineEventsList" class="relative border-l-2 border-orange-500/40 ml-4 space-y-6 pl-6">
+          <!-- Injected by app.js -->
         </div>
       </div>
     </div>
 
     <!-- EMPTY SEARCH STATE -->
-    <div id="emptySearchState" class="hidden text-center py-20">
-      <div class="w-16 h-16 rounded-2xl bg-slate-800/80 border border-slate-700 flex items-center justify-center mx-auto mb-4 text-slate-400">
-        <i data-lucide="search-x" class="w-8 h-8"></i>
+    <div id="emptySearchState" class="hidden text-center py-16">
+      <div class="w-14 h-14 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center mx-auto mb-3 text-slate-500">
+        <i data-lucide="search-x" class="w-6 h-6"></i>
       </div>
-      <h3 class="text-lg font-bold text-white mb-1">No matching events found</h3>
-      <p class="text-xs text-slate-400 max-w-sm mx-auto mb-6">
-        We couldn't find any campus events matching your current filters. Try searching for different keywords or reset your filters.
+      <h3 class="text-base font-bold text-white mb-1">No matching campus events found</h3>
+      <p class="text-xs text-slate-400 max-w-sm mx-auto mb-4">
+        Try adjusting your keywords or clearing the category and pricing filters.
       </p>
-      <button onclick="App.resetFilters()" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-bold transition-all shadow-md">
+      <button onclick="App.resetFilters()" class="px-4 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold shadow-md shadow-orange-500/20">
         Reset All Filters
       </button>
     </div>
@@ -459,69 +438,69 @@
   <!-- =========================================================================
        FOOTER
        ========================================================================= -->
-  <footer class="border-t border-slate-800/80 bg-slate-950 py-12 text-slate-400 text-xs">
+  <footer class="border-t border-slate-800 bg-[#080C14] py-10 text-slate-400 text-xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="flex items-center gap-3">
-          <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center text-white">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-orange-500 flex items-center justify-center text-white font-bold">
             <i data-lucide="sparkles" class="w-4 h-4"></i>
           </div>
           <div>
-            <div class="font-bold text-slate-200">CampusVibe Hub</div>
-            <div class="text-[10px] text-slate-500">Built for Excellence & Campus Life Competition 2026</div>
+            <div class="font-bold text-slate-200 text-sm">CampusVibe Event Hub</div>
+            <div class="text-[10px] text-slate-500">Official Collegiate Festival & Registration Portal 2026</div>
           </div>
         </div>
-        <div class="flex flex-wrap items-center gap-6 text-slate-400">
-          <a href="#" class="hover:text-slate-200 transition-colors">Privacy Policy</a>
-          <a href="#" class="hover:text-slate-200 transition-colors">Code of Conduct</a>
-          <a href="#" class="hover:text-slate-200 transition-colors">Club Guidelines</a>
-          <a href="#" class="hover:text-slate-200 transition-colors">Contact Dean</a>
+        <div class="flex flex-wrap items-center gap-5 text-slate-400 font-medium">
+          <a href="#" class="hover:text-slate-200">Campus Code of Conduct</a>
+          <a href="#" class="hover:text-slate-200">Club Societies Board</a>
+          <a href="#" class="hover:text-slate-200">Dean of Students</a>
+          <a href="#" class="hover:text-slate-200">Help Desk</a>
         </div>
-        <div class="text-slate-500 text-center md:text-right">
-          © 2026 Campus Event Hub. Frontend-only prototype powered by HTML5, Tailwind & Vanilla JS.
+        <div class="text-slate-500 text-center md:text-right text-[11px]">
+          Built for Student Life Excellence. Authenticated digital passes generated client-side.
         </div>
       </div>
     </div>
   </footer>
 
   <!-- =========================================================================
-       MODAL 1: REGISTRATION WIZARD (THE CORE STAR FEATURE)
+       MODAL 1: REGISTRATION WIZARD (Colorful 3-Step Wizard)
        ========================================================================= -->
   <div id="registrationModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto">
-    <div class="modal-enter w-full max-w-xl bg-slate-900 border border-slate-700/80 rounded-3xl shadow-2xl overflow-hidden my-8">
+    <div class="campus-modal-in w-full max-w-lg bg-slate-900 border border-slate-700 rounded-3xl shadow-2xl overflow-hidden my-8">
       
       <!-- Modal Header -->
-      <div class="relative p-6 bg-gradient-to-r from-brand-950 via-slate-900 to-slate-900 border-b border-slate-800">
-        <button onclick="App.closeRegistrationModal()" class="absolute right-4 top-4 p-1.5 rounded-full bg-slate-800/80 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors">
+      <div class="relative p-6 bg-gradient-to-r from-slate-950 via-slate-900 to-orange-950/40 border-b border-slate-800">
+        <button onclick="App.closeRegistrationModal()" class="absolute right-4 top-4 p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
-        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-brand-500/20 text-brand-400 border border-brand-500/30 mb-2">
-          Official Student Registration
-        </span>
+        <div class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-orange-500 text-white mb-2 shadow-sm">
+          Student Event Registration
+        </div>
         <h3 id="regEventTitle" class="text-xl font-bold text-white leading-tight">
           Register for Event
         </h3>
-        <p id="regEventMeta" class="text-xs text-slate-400 mt-1 flex items-center gap-2">
+        <p id="regEventMeta" class="text-xs text-slate-300 mt-1 flex items-center gap-2">
           <span id="regEventDate">Date</span> • <span id="regEventVenue">Venue</span>
         </p>
       </div>
 
       <!-- Multi-step Indicator -->
-      <div class="px-6 pt-4 pb-2 border-b border-slate-800/60 bg-slate-950/40">
-        <div class="flex items-center justify-between text-xs font-semibold">
-          <div id="step1Indicator" class="flex items-center gap-2 text-brand-400">
-            <span class="w-6 h-6 rounded-full bg-brand-600 text-white flex items-center justify-center text-[11px] font-bold">1</span>
-            <span>Student Profile</span>
+      <div class="px-6 py-3 border-b border-slate-800 bg-slate-950/60">
+        <div class="flex items-center justify-between text-xs font-bold">
+          <div id="step1Indicator" class="flex items-center gap-2 text-orange-400">
+            <span class="w-6 h-6 rounded-full bg-orange-500 text-white flex items-center justify-center text-[10px] font-black">1</span>
+            <span>Student Info</span>
           </div>
-          <div class="h-0.5 w-12 bg-slate-700 mx-2"></div>
+          <div class="h-0.5 flex-1 bg-slate-800 mx-3"></div>
           <div id="step2Indicator" class="flex items-center gap-2 text-slate-500">
-            <span class="w-6 h-6 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center text-[11px] font-bold">2</span>
+            <span class="w-6 h-6 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center text-[10px] font-black">2</span>
             <span>Participation</span>
           </div>
-          <div class="h-0.5 w-12 bg-slate-700 mx-2"></div>
+          <div class="h-0.5 flex-1 bg-slate-800 mx-3"></div>
           <div id="step3Indicator" class="flex items-center gap-2 text-slate-500">
-            <span class="w-6 h-6 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center text-[11px] font-bold">3</span>
-            <span>Confirm Pass</span>
+            <span class="w-6 h-6 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center text-[10px] font-black">3</span>
+            <span>Pass Preview</span>
           </div>
         </div>
       </div>
@@ -531,84 +510,81 @@
         <input type="hidden" id="regEventId" value="" />
 
         <!-- STEP 1: STUDENT PROFILE -->
-        <div id="formStep1" class="space-y-4">
+        <div id="formStep1" class="space-y-3.5">
           <div>
-            <label class="block text-xs font-medium text-slate-300 mb-1">Full Name <span class="text-rose-400">*</span></label>
+            <label class="block text-xs font-bold text-slate-300 mb-1">Full Student Name <span class="text-rose-400">*</span></label>
             <input 
               type="text" 
               id="studentName" 
               required 
               placeholder="e.g. Aryan Verma"
               value="Aryan Verma"
-              class="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-800/90 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500"
+              class="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-950 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-orange-500"
             />
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">College Roll No. / Student ID <span class="text-rose-400">*</span></label>
+              <label class="block text-xs font-bold text-slate-300 mb-1">Roll Number / Student ID <span class="text-rose-400">*</span></label>
               <input 
                 type="text" 
                 id="studentRoll" 
                 required 
-                placeholder="e.g. 24BCS108"
+                placeholder="24BCS108"
                 value="24BCS108"
-                class="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-800/90 border border-slate-700 text-slate-100 uppercase placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 font-mono-code"
+                class="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-950 border border-slate-700 text-slate-100 uppercase font-mono placeholder-slate-500 focus:outline-none focus:border-orange-500"
               />
             </div>
             <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">Official College Email <span class="text-rose-400">*</span></label>
+              <label class="block text-xs font-bold text-slate-300 mb-1">College Email ID <span class="text-rose-400">*</span></label>
               <input 
                 type="email" 
                 id="studentEmail" 
                 required 
-                placeholder="e.g. aryan.24bcs@college.edu"
+                placeholder="aryan.verma@college.edu"
                 value="aryan.verma@college.edu"
-                class="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-800/90 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500"
+                class="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-950 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-orange-500"
               />
             </div>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">Department / Branch <span class="text-rose-400">*</span></label>
-              <select id="studentDept" class="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-800/90 border border-slate-700 text-slate-100 focus:outline-none focus:border-brand-500">
-                <option value="Computer Science & Engineering">Computer Science & Engineering (CSE)</option>
-                <option value="Information Technology">Information Technology (IT)</option>
-                <option value="Electronics & Communication">Electronics & Communication (ECE)</option>
-                <option value="Mechanical Engineering">Mechanical Engineering (ME)</option>
-                <option value="Electrical Engineering">Electrical Engineering (EE)</option>
-                <option value="Design & Architecture">Design & Architecture (B.Des)</option>
-                <option value="Management & Commerce">Management & Commerce (BBA/MBA)</option>
+              <label class="block text-xs font-bold text-slate-300 mb-1">Department / Branch</label>
+              <select id="studentDept" class="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-950 border border-slate-700 text-slate-100 focus:outline-none focus:border-orange-500 font-medium">
+                <option value="Computer Science & Engineering">Computer Science & Engineering</option>
+                <option value="Information Technology">Information Technology</option>
+                <option value="Electronics & Communication">Electronics & Communication</option>
+                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                <option value="Management Studies">Management Studies</option>
               </select>
             </div>
             <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">Academic Year <span class="text-rose-400">*</span></label>
-              <select id="studentYear" class="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-800/90 border border-slate-700 text-slate-100 focus:outline-none focus:border-brand-500">
+              <label class="block text-xs font-bold text-slate-300 mb-1">Year of Study</label>
+              <select id="studentYear" class="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-950 border border-slate-700 text-slate-100 focus:outline-none focus:border-orange-500 font-medium">
                 <option value="1st Year">1st Year (Freshman)</option>
                 <option value="2nd Year">2nd Year (Sophomore)</option>
                 <option value="3rd Year" selected>3rd Year (Junior)</option>
                 <option value="4th Year">4th Year (Senior)</option>
-                <option value="Postgraduate">Postgraduate (M.Tech/MBA)</option>
               </select>
             </div>
           </div>
         </div>
 
         <!-- STEP 2: PARTICIPATION PREFERENCES -->
-        <div id="formStep2" class="hidden space-y-4">
+        <div id="formStep2" class="hidden space-y-3.5">
           <div>
-            <label class="block text-xs font-medium text-slate-300 mb-1.5">Participation Type</label>
-            <div class="grid grid-cols-2 gap-3">
-              <label class="flex items-center gap-2 p-3 rounded-xl border border-brand-500/40 bg-brand-500/10 cursor-pointer">
-                <input type="radio" name="participationType" value="solo" checked onchange="App.toggleTeamInput(false)" class="text-brand-500" />
+            <label class="block text-xs font-bold text-slate-300 mb-1.5">Participation Mode</label>
+            <div class="grid grid-cols-2 gap-2.5">
+              <label class="flex items-center gap-2 p-3 rounded-xl border-2 border-orange-500/50 bg-orange-500/10 cursor-pointer">
+                <input type="radio" name="participationType" value="solo" checked onchange="App.toggleTeamInput(false)" class="text-orange-500" />
                 <div>
                   <span class="block text-xs font-bold text-white">Solo Attendee</span>
-                  <span class="block text-[10px] text-slate-400">Individual Participant</span>
+                  <span class="block text-[10px] text-slate-400">Individual Pass</span>
                 </div>
               </label>
-              <label class="flex items-center gap-2 p-3 rounded-xl border border-slate-700 bg-slate-800/60 cursor-pointer">
-                <input type="radio" name="participationType" value="team" onchange="App.toggleTeamInput(true)" class="text-brand-500" />
+              <label class="flex items-center gap-2 p-3 rounded-xl border border-slate-700 bg-slate-950 cursor-pointer">
+                <input type="radio" name="participationType" value="team" onchange="App.toggleTeamInput(true)" class="text-orange-500" />
                 <div>
                   <span class="block text-xs font-bold text-white">Team Lead</span>
                   <span class="block text-[10px] text-slate-400">Squad (2-4 Members)</span>
@@ -617,42 +593,41 @@
             </div>
           </div>
 
-          <!-- Team Fields (Hidden by default unless selected) -->
-          <div id="teamDetailsBox" class="hidden p-3.5 rounded-2xl bg-slate-950/60 border border-slate-800 space-y-3">
+          <!-- Team Fields -->
+          <div id="teamDetailsBox" class="hidden p-3.5 rounded-2xl bg-slate-950 border border-slate-800 space-y-3">
             <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">Team / Squad Name</label>
+              <label class="block text-xs font-bold text-slate-300 mb-1">Team / Squad Name</label>
               <input 
                 type="text" 
                 id="teamName" 
-                placeholder="e.g. CodeSorcerers or CyberKnights"
-                class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-800/90 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500"
+                placeholder="e.g. Phoenix Clan"
+                class="w-full px-3 py-2 text-xs rounded-xl bg-slate-900 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-orange-500"
               />
             </div>
             <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">Teammates (Name & Roll No.)</label>
+              <label class="block text-xs font-bold text-slate-300 mb-1">Teammates (Name & Roll Number)</label>
               <textarea 
                 id="teammateDetails" 
                 rows="2"
                 placeholder="1. Priya Sharma (24BCS112)&#10;2. Rohan Das (24BCS098)"
-                class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-800/90 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500"
+                class="w-full px-3 py-2 text-xs rounded-xl bg-slate-900 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-orange-500"
               ></textarea>
             </div>
           </div>
 
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-cols-2 gap-3">
             <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">T-Shirt Swag Size</label>
-              <select id="tshirtSize" class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-800/90 border border-slate-700 text-slate-100 focus:outline-none focus:border-brand-500">
+              <label class="block text-xs font-bold text-slate-300 mb-1">Swag / T-Shirt Size</label>
+              <select id="tshirtSize" class="w-full px-3 py-2 text-xs rounded-xl bg-slate-950 border border-slate-700 text-slate-100 focus:outline-none focus:border-orange-500 font-medium">
                 <option value="S">Small (S)</option>
                 <option value="M" selected>Medium (M)</option>
                 <option value="L">Large (L)</option>
                 <option value="XL">Extra Large (XL)</option>
-                <option value="XXL">XXL</option>
               </select>
             </div>
             <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">Dietary Preference</label>
-              <select id="dietaryPref" class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-800/90 border border-slate-700 text-slate-100 focus:outline-none focus:border-brand-500">
+              <label class="block text-xs font-bold text-slate-300 mb-1">Dietary Preference</label>
+              <select id="dietaryPref" class="w-full px-3 py-2 text-xs rounded-xl bg-slate-950 border border-slate-700 text-slate-100 focus:outline-none focus:border-orange-500 font-medium">
                 <option value="Veg">Vegetarian</option>
                 <option value="Non-Veg">Non-Vegetarian</option>
                 <option value="Jain">Jain Meal</option>
@@ -661,48 +636,41 @@
           </div>
 
           <div>
-            <label class="block text-xs font-medium text-slate-300 mb-1">GitHub / Portfolio URL (Optional)</label>
+            <label class="block text-xs font-bold text-slate-300 mb-1">Portfolio or GitHub Link (Optional)</label>
             <input 
               type="url" 
               id="studentPortfolio" 
               placeholder="https://github.com/username"
-              class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-800/90 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500"
+              class="w-full px-3 py-2 text-xs rounded-xl bg-slate-950 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-orange-500"
             />
           </div>
         </div>
 
         <!-- STEP 3: REVIEW & CONFIRMATION -->
-        <div id="formStep3" class="hidden space-y-4">
-          <div class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-2.5">
-            <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Registration Summary</h4>
-            <div class="flex justify-between text-xs py-1 border-b border-slate-800/60">
-              <span class="text-slate-400">Event:</span>
-              <span id="summaryEventName" class="font-bold text-white text-right">-</span>
+        <div id="formStep3" class="hidden space-y-3.5">
+          <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-2 text-xs">
+            <div class="text-[11px] font-black text-orange-400 uppercase tracking-wider mb-1">Registration Summary</div>
+            <div class="flex justify-between py-1 border-b border-slate-800">
+              <span class="text-slate-400">Selected Event:</span>
+              <span id="summaryEventName" class="font-bold text-white text-right truncate ml-4">-</span>
             </div>
-            <div class="flex justify-between text-xs py-1 border-b border-slate-800/60">
-              <span class="text-slate-400">Attendee:</span>
-              <span id="summaryStudentName" class="font-medium text-brand-300">-</span>
+            <div class="flex justify-between py-1 border-b border-slate-800">
+              <span class="text-slate-400">Student Name:</span>
+              <span id="summaryStudentName" class="font-bold text-amber-300">-</span>
             </div>
-            <div class="flex justify-between text-xs py-1 border-b border-slate-800/60">
-              <span class="text-slate-400">Roll No:</span>
-              <span id="summaryStudentRoll" class="font-mono-code text-slate-200">-</span>
+            <div class="flex justify-between py-1 border-b border-slate-800">
+              <span class="text-slate-400">Roll Number:</span>
+              <span id="summaryStudentRoll" class="font-mono text-slate-200">-</span>
             </div>
-            <div class="flex justify-between text-xs py-1 border-b border-slate-800/60">
-              <span class="text-slate-400">Entry Fee:</span>
-              <span class="font-bold text-emerald-400">Free Campus Admission</span>
-            </div>
-            <div class="flex justify-between text-xs py-1">
-              <span class="text-slate-400">Verification:</span>
-              <span class="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-400">
-                <i data-lucide="check" class="w-3.5 h-3.5"></i>
-                Instant E-Pass Generation
-              </span>
+            <div class="flex justify-between py-1">
+              <span class="text-slate-400">Admission Fee:</span>
+              <span class="font-bold text-emerald-400">Official Student Pass (Free)</span>
             </div>
           </div>
 
           <label class="flex items-start gap-2.5 text-xs text-slate-300 cursor-pointer pt-1">
-            <input type="checkbox" id="acceptRulesCheck" required class="mt-0.5 rounded text-brand-600 focus:ring-brand-500" />
-            <span>I confirm that the details provided are accurate. I agree to abide by the university code of conduct and event guidelines.</span>
+            <input type="checkbox" id="acceptRulesCheck" required class="mt-0.5 rounded text-orange-500 focus:ring-orange-500" />
+            <span>I confirm that the details provided are accurate and I agree to abide by university event rules and carry my physical student ID.</span>
           </label>
         </div>
 
@@ -712,7 +680,7 @@
             type="button" 
             id="prevStepBtn" 
             onclick="App.stepBackWizard()" 
-            class="hidden px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition-all"
+            class="hidden px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition-all"
           >
             Back
           </button>
@@ -721,17 +689,17 @@
             type="button" 
             id="nextStepBtn" 
             onclick="App.stepNextWizard()" 
-            class="px-6 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-bold transition-all shadow-md shadow-brand-500/20"
+            class="px-5 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white text-xs font-black transition-all shadow-md shadow-orange-500/20"
           >
             Continue to Preferences →
           </button>
           <button 
             type="submit" 
             id="submitRegBtn" 
-            class="hidden px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold transition-all shadow-lg shadow-emerald-500/20 active:scale-95 flex items-center gap-2"
+            class="hidden px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white text-xs font-black transition-all shadow-lg shadow-emerald-500/25 flex items-center gap-2 active:scale-95"
           >
-            <i data-lucide="check-circle" class="w-4 h-4"></i>
-            <span>Confirm & Generate E-Pass</span>
+            <i data-lucide="badge-check" class="w-4 h-4"></i>
+            <span>Confirm & Generate Pass 🎉</span>
           </button>
         </div>
 
@@ -740,125 +708,116 @@
   </div>
 
   <!-- =========================================================================
-       MODAL 2: DIGITAL E-TICKET PASS (WITH SCANNABLE QR CODE)
+       MODAL 2: AUTHENTIC COLLEGE FEST PASS (Concert & Lanyard Badge Style)
        ========================================================================= -->
   <div id="ticketModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/85 backdrop-blur-md overflow-y-auto">
-    <div class="modal-enter w-full max-w-lg my-8">
+    <div class="campus-modal-in w-full max-w-md my-8">
       
-      <!-- Close button on top -->
-      <div class="flex justify-end mb-3">
-        <button onclick="App.closeTicketModal()" class="p-2 rounded-full bg-slate-800/80 text-slate-400 hover:text-white transition-colors">
-          <i data-lucide="x" class="w-5 h-5"></i>
+      <!-- Close button -->
+      <div class="flex justify-end mb-2">
+        <button onclick="App.closeTicketModal()" class="p-1.5 rounded-full bg-slate-900 text-slate-400 hover:text-white transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
-      <!-- PRINTABLE PASS CARD -->
-      <div id="printableTicket" class="ticket-wrapper p-6 sm:p-8 text-white relative">
-        <div class="ticket-notch-left"></div>
-        <div class="ticket-notch-right"></div>
-        <div class="ticket-perforation"></div>
+      <!-- FESTIVAL LANYARD BADGE PASS -->
+      <div id="printableTicket" class="fest-pass p-6 text-slate-100 relative shadow-2xl">
+        <div class="lanyard-hole"></div>
+        <div class="pass-notch-l"></div>
+        <div class="pass-notch-r"></div>
+        <div class="pass-tear-line"></div>
 
-        <!-- Holographic Top Foil -->
-        <div class="hologram-strip h-1.5 w-full rounded-full mb-4"></div>
-
-        <!-- Ticket Header -->
-        <div class="flex items-start justify-between gap-4 mb-4">
+        <!-- Top Header Strip -->
+        <div class="flex items-start justify-between gap-3 mb-4">
           <div>
-            <div class="flex items-center gap-1.5 text-brand-300 text-[11px] font-bold uppercase tracking-wider mb-1">
-              <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i>
-              Official Campus Event Pass
+            <div class="flex items-center gap-1.5 text-orange-400 text-[10px] font-black uppercase tracking-wider mb-1">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+              Official Festival Entry Badge
             </div>
-            <h3 id="ticketEventTitle" class="text-xl sm:text-2xl font-black leading-tight text-white">
+            <h3 id="ticketEventTitle" class="text-lg sm:text-xl font-black text-white leading-tight">
               Event Title
             </h3>
-            <p id="ticketClubOrganizer" class="text-xs text-slate-300 font-medium mt-1">
+            <p id="ticketClubOrganizer" class="text-xs text-slate-400 font-medium mt-0.5">
               Organized by GDSC
             </p>
           </div>
-          <div class="text-right">
-            <span class="inline-block px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-              CONFIRMED
+          <div class="text-right shrink-0">
+            <span class="inline-block px-2.5 py-1 rounded-lg text-[10px] font-black uppercase bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
+              VERIFIED PASS
             </span>
-            <div id="ticketPassId" class="text-[11px] font-mono-code text-slate-400 mt-1">
+            <div id="ticketPassId" class="text-[11px] font-mono text-slate-400 mt-1 font-bold">
               PASS-#84912
             </div>
           </div>
         </div>
 
-        <!-- Event Details Bar -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3.5 rounded-2xl bg-slate-950/60 border border-white/5 mb-6 text-xs">
+        <!-- Event Grid Details -->
+        <div class="grid grid-cols-2 gap-3 p-3.5 rounded-2xl bg-slate-950/90 border border-white/5 mb-5 text-xs">
           <div>
-            <span class="block text-[10px] text-slate-400 uppercase font-semibold">Date</span>
-            <span id="ticketEventDate" class="font-bold text-slate-200">Nov 6, 2026</span>
+            <span class="block text-[10px] text-slate-400 uppercase font-bold">Date & Time</span>
+            <span id="ticketEventDate" class="font-bold text-white">Nov 6, 2026</span>
+            <span id="ticketEventTime" class="block text-[11px] text-orange-400 font-medium">09:00 AM</span>
           </div>
           <div>
-            <span class="block text-[10px] text-slate-400 uppercase font-semibold">Time</span>
-            <span id="ticketEventTime" class="font-bold text-slate-200">09:00 AM</span>
-          </div>
-          <div class="col-span-2 sm:col-span-1">
-            <span class="block text-[10px] text-slate-400 uppercase font-semibold">Venue</span>
-            <span id="ticketEventVenue" class="font-bold text-slate-200 truncate block">Auditorium</span>
+            <span class="block text-[10px] text-slate-400 uppercase font-bold">Venue & Gate</span>
+            <span id="ticketEventVenue" class="font-bold text-white truncate block">Auditorium</span>
+            <span id="ticketGateNumber" class="block text-[11px] text-amber-400 font-medium">Gate 2 • Section B</span>
           </div>
         </div>
 
         <!-- Attendee Info -->
-        <div class="flex items-center justify-between gap-4 pb-6 border-b border-white/10 text-xs">
+        <div class="flex items-center justify-between gap-4 pb-5 text-xs">
           <div>
-            <span class="block text-[10px] text-slate-400 uppercase font-semibold">Attendee Name</span>
-            <span id="ticketAttendeeName" class="text-sm font-extrabold text-white">Aryan Verma</span>
-            <span id="ticketAttendeeRoll" class="block text-[11px] font-mono-code text-brand-300">#24BCS108</span>
+            <span class="block text-[10px] text-slate-400 uppercase font-bold">Student Attendee</span>
+            <span id="ticketAttendeeName" class="font-black text-white text-sm">Aryan Verma</span>
+            <span id="ticketAttendeeRoll" class="block font-mono text-orange-400 text-[11px]">#24BCS108</span>
           </div>
           <div class="text-right">
-            <span class="block text-[10px] text-slate-400 uppercase font-semibold">Seat / Gate</span>
-            <span id="ticketGateNumber" class="text-sm font-bold text-amber-400">Gate 2 • Row C</span>
-            <span id="ticketTeamBadge" class="block text-[10px] text-slate-400">Solo Entry</span>
+            <span class="block text-[10px] text-slate-400 uppercase font-bold">Pass Mode</span>
+            <span id="ticketTeamBadge" class="font-bold text-slate-200">Individual Attendee</span>
           </div>
         </div>
 
-        <!-- QR Code & Security Stub Section -->
-        <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div class="flex items-center gap-4">
-            <!-- Dynamic QR Code Container -->
-            <div id="qrcodeWrapper" class="p-2 bg-white rounded-xl shadow-lg shrink-0">
-              <div id="ticketQRCode"></div>
-            </div>
-            <div>
-              <div class="text-xs font-bold text-white">Scan at Security Turnstile</div>
-              <p class="text-[10px] text-slate-400 mt-0.5 leading-relaxed">
-                Present this digital QR pass along with your physical College ID card at the entry gate.
-              </p>
-              <div class="mt-2 text-[10px] font-mono-code text-slate-500 tracking-widest">
-                VERIFIED-AUTH-HASH-2026
-              </div>
+        <!-- Dynamic QR Code & Turnstile Check-in -->
+        <div class="pt-5 flex items-center justify-between gap-4">
+          <div class="p-2 bg-white rounded-xl shadow-md shrink-0">
+            <div id="ticketQRCode"></div>
+          </div>
+          <div class="flex-1 text-left">
+            <div class="text-xs font-black text-white">Scan at Entry Turnstile</div>
+            <p class="text-[10px] text-slate-400 mt-0.5 leading-snug">
+              Save this digital pass on your phone or print a paper copy. Must carry student ID card.
+            </p>
+            <div class="mt-2 text-[9px] font-mono text-slate-500 tracking-wider">
+              AUTH-HASH: CEH-2026-CAMPUS-VERIFIED
             </div>
           </div>
         </div>
 
       </div>
 
-      <!-- Pass Actions Row -->
-      <div class="mt-4 flex flex-wrap items-center justify-center gap-3 no-print">
+      <!-- Action Buttons -->
+      <div class="mt-3 flex flex-wrap items-center justify-center gap-2 no-print">
         <button 
           onclick="window.print()" 
-          class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-bold flex items-center gap-2 shadow-lg shadow-brand-500/30 transition-all active:scale-95"
+          class="px-4 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white text-xs font-black flex items-center gap-1.5 shadow-md shadow-orange-500/25 transition-all"
         >
-          <i data-lucide="printer" class="w-4 h-4"></i>
-          <span>Print / Save as PDF</span>
+          <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+          <span>Print Pass</span>
         </button>
         <button 
-          id="exportSingleIcsBtn" 
           onclick="App.exportTicketToCalendar()" 
-          class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold flex items-center gap-2 transition-all"
+          class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 flex items-center gap-1.5 transition-colors"
         >
-          <i data-lucide="calendar-plus" class="w-4 h-4 text-brand-400"></i>
-          <span>Add to Calendar (.ics)</span>
+          <i data-lucide="calendar" class="w-3.5 h-3.5 text-orange-400"></i>
+          <span>Add to Calendar</span>
         </button>
         <button 
           onclick="App.openWalletModal()" 
-          class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold flex items-center gap-2 transition-all"
+          class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 flex items-center gap-1.5 transition-colors"
         >
-          <i data-lucide="wallet" class="w-4 h-4 text-emerald-400"></i>
-          <span>View in Pass Wallet</span>
+          <i data-lucide="wallet" class="w-3.5 h-3.5 text-emerald-400"></i>
+          <span>My Passes</span>
         </button>
       </div>
 
@@ -866,123 +825,91 @@
   </div>
 
   <!-- =========================================================================
-       MODAL 3: EVENT DEEP DIVE (FULL DETAILS, AGENDA & RULES)
+       MODAL 3: EVENT DEEP DIVE (Rich Tabs & Details)
        ========================================================================= -->
   <div id="detailsModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto">
-    <div class="modal-enter w-full max-w-2xl bg-slate-900 border border-slate-700/80 rounded-3xl shadow-2xl overflow-hidden my-8">
+    <div class="campus-modal-in w-full max-w-xl bg-slate-900 border border-slate-700 rounded-3xl shadow-2xl overflow-hidden my-8">
       
-      <!-- Event Hero Banner inside Modal -->
-      <div class="relative h-56 sm:h-64 bg-slate-950 overflow-hidden">
-        <img id="detailHeroImage" src="" alt="Event Banner" class="w-full h-full object-cover opacity-60" />
-        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
-        <button onclick="App.closeDetailsModal()" class="absolute right-4 top-4 p-2 rounded-full bg-slate-900/80 text-slate-300 hover:text-white transition-colors">
-          <i data-lucide="x" class="w-5 h-5"></i>
+      <!-- Modal Header -->
+      <div class="p-6 bg-gradient-to-r from-slate-950 via-slate-900 to-indigo-950/40 border-b border-slate-800 relative">
+        <button onclick="App.closeDetailsModal()" class="absolute right-4 top-4 p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
         </button>
-        <div class="absolute bottom-4 left-6 right-6">
-          <span id="detailCategoryBadge" class="inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider mb-2">
+        <div class="flex items-center gap-2 mb-2">
+          <span id="detailCategoryBadge" class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-orange-500/20 text-orange-400 border border-orange-500/40">
             Category
           </span>
-          <h2 id="detailTitle" class="text-xl sm:text-2xl font-black text-white leading-tight">
-            Event Title
-          </h2>
-          <p id="detailTagline" class="text-xs text-slate-300 mt-1 line-clamp-1">
-            Tagline
-          </p>
+          <span id="detailSeats" class="text-xs font-bold text-emerald-400">Available</span>
         </div>
+        <h2 id="detailTitle" class="text-xl font-black text-white leading-tight">
+          Event Title
+        </h2>
+        <p id="detailTagline" class="text-xs text-slate-300 mt-1 line-clamp-1 font-medium">
+          Tagline
+        </p>
       </div>
 
       <!-- Quick Info Bar -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 p-4 bg-slate-950 border-b border-slate-800 text-xs">
-        <div class="flex items-center gap-2">
-          <i data-lucide="calendar" class="w-4 h-4 text-brand-400 shrink-0"></i>
-          <div>
-            <span class="block text-[10px] text-slate-500 uppercase">Date</span>
-            <span id="detailDate" class="font-bold text-slate-200">Date</span>
-          </div>
+      <div class="grid grid-cols-3 gap-2 p-3 bg-slate-950/80 border-b border-slate-800 text-xs text-slate-200 font-semibold">
+        <div>
+          <span class="block text-[10px] text-slate-400 uppercase font-bold">Date</span>
+          <span id="detailDate" class="text-white truncate block">Date</span>
         </div>
-        <div class="flex items-center gap-2">
-          <i data-lucide="clock" class="w-4 h-4 text-brand-400 shrink-0"></i>
-          <div>
-            <span class="block text-[10px] text-slate-500 uppercase">Time</span>
-            <span id="detailTime" class="font-bold text-slate-200">Time</span>
-          </div>
+        <div>
+          <span class="block text-[10px] text-slate-400 uppercase font-bold">Time</span>
+          <span id="detailTime" class="text-orange-400 truncate block">Time</span>
         </div>
-        <div class="flex items-center gap-2">
-          <i data-lucide="map-pin" class="w-4 h-4 text-brand-400 shrink-0"></i>
-          <div>
-            <span class="block text-[10px] text-slate-500 uppercase">Venue</span>
-            <span id="detailVenue" class="font-bold text-slate-200 truncate">Venue</span>
-          </div>
-        </div>
-        <div class="flex items-center gap-2">
-          <i data-lucide="users" class="w-4 h-4 text-emerald-400 shrink-0"></i>
-          <div>
-            <span class="block text-[10px] text-slate-500 uppercase">Seats</span>
-            <span id="detailSeats" class="font-bold text-emerald-400">Available</span>
-          </div>
+        <div>
+          <span class="block text-[10px] text-slate-400 uppercase font-bold">Venue</span>
+          <span id="detailVenue" class="text-white truncate block">Venue</span>
         </div>
       </div>
 
-      <!-- Tabs Navigation -->
-      <div class="flex border-b border-slate-800 px-6 pt-3 gap-6 text-xs font-semibold">
-        <button id="tabBtnAbout" onclick="App.switchDetailTab('about')" class="pb-3 border-b-2 border-brand-500 text-brand-400">
-          About & Overview
+      <!-- Tab Buttons -->
+      <div class="flex border-b border-slate-800 px-6 pt-3 gap-4 text-xs font-bold">
+        <button id="tabBtnAbout" onclick="App.switchDetailTab('about')" class="pb-2.5 border-b-2 border-orange-500 text-orange-400">
+          About
         </button>
-        <button id="tabBtnSchedule" onclick="App.switchDetailTab('schedule')" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-white">
-          Agenda / Rounds
+        <button id="tabBtnSchedule" onclick="App.switchDetailTab('schedule')" class="pb-2.5 border-b-2 border-transparent text-slate-400 hover:text-white">
+          Agenda
         </button>
-        <button id="tabBtnPrizes" onclick="App.switchDetailTab('prizes')" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-white">
-          Prizes & Perks
+        <button id="tabBtnPrizes" onclick="App.switchDetailTab('prizes')" class="pb-2.5 border-b-2 border-transparent text-slate-400 hover:text-white">
+          Prizes & Goodies
         </button>
-        <button id="tabBtnRules" onclick="App.switchDetailTab('rules')" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-white">
-          Rules & Contact
+        <button id="tabBtnRules" onclick="App.switchDetailTab('rules')" class="pb-2.5 border-b-2 border-transparent text-slate-400 hover:text-white">
+          Rules & Guidelines
         </button>
       </div>
 
-      <!-- Tab Contents -->
-      <div class="p-6 text-xs text-slate-300 min-h-[180px] max-h-[320px] overflow-y-auto">
-        
-        <!-- TAB 1: ABOUT -->
-        <div id="tabContentAbout" class="space-y-4">
-          <p id="detailDescription" class="leading-relaxed text-slate-300">
-            Description goes here.
-          </p>
-          <div>
-            <h4 class="font-bold text-white uppercase text-[11px] mb-2 tracking-wider">Tags & Focus Areas</h4>
-            <div id="detailTagsList" class="flex flex-wrap gap-1.5"></div>
-          </div>
+      <!-- Tab Body -->
+      <div class="p-6 text-xs text-slate-300 max-h-[300px] overflow-y-auto">
+        <div id="tabContentAbout" class="space-y-3">
+          <p id="detailDescription" class="leading-relaxed text-slate-300"></p>
+          <div id="detailTagsList" class="flex flex-wrap gap-1.5 pt-2"></div>
         </div>
 
-        <!-- TAB 2: SCHEDULE -->
-        <div id="tabContentSchedule" class="hidden space-y-3">
-          <div id="detailScheduleList" class="space-y-3 border-l-2 border-brand-500/30 pl-4">
-            <!-- Populated via JS -->
-          </div>
+        <div id="tabContentSchedule" class="hidden space-y-2.5">
+          <div id="detailScheduleList" class="space-y-2 border-l-2 border-orange-500/40 pl-3"></div>
         </div>
 
-        <!-- TAB 3: PRIZES -->
-        <div id="tabContentPrizes" class="hidden space-y-3">
-          <div id="detailPrizesList" class="space-y-2">
-            <!-- Populated via JS -->
-          </div>
+        <div id="tabContentPrizes" class="hidden space-y-2">
+          <div id="detailPrizesList" class="space-y-1.5"></div>
         </div>
 
-        <!-- TAB 4: RULES & CONTACT -->
-        <div id="tabContentRules" class="hidden space-y-4">
+        <div id="tabContentRules" class="hidden space-y-3">
           <div>
-            <h4 class="font-bold text-white uppercase text-[11px] mb-1.5 tracking-wider">Eligibility</h4>
-            <p id="detailEligibility" class="text-slate-300 leading-relaxed"></p>
+            <h4 class="font-bold text-white text-xs mb-1">Eligibility</h4>
+            <p id="detailEligibility" class="text-slate-300"></p>
           </div>
           <div>
-            <h4 class="font-bold text-white uppercase text-[11px] mb-1.5 tracking-wider">Guidelines & Regulations</h4>
+            <h4 class="font-bold text-white text-xs mb-1">Guidelines</h4>
             <ul id="detailRulesList" class="list-disc pl-4 space-y-1 text-slate-400"></ul>
           </div>
-          <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800">
-            <h4 class="font-bold text-white uppercase text-[11px] mb-1 tracking-wider">Organizer Contact</h4>
-            <p id="detailContactInfo" class="text-slate-300"></p>
+          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+            <h4 class="font-bold text-white text-xs mb-0.5">Faculty / Society Coordinator</h4>
+            <p id="detailContactInfo" class="text-slate-300 text-[11px]"></p>
           </div>
         </div>
-
       </div>
 
       <!-- Modal Footer -->
@@ -990,24 +917,24 @@
         <button 
           id="detailBookmarkBtn" 
           onclick="App.toggleDetailBookmark()"
-          class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+          class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
           title="Save to favorites"
         >
           <i data-lucide="heart" id="detailBookmarkIcon" class="w-4 h-4"></i>
         </button>
         <button 
           onclick="App.downloadDetailIcs()" 
-          class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold flex items-center gap-1.5"
+          class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold flex items-center gap-1.5"
         >
-          <i data-lucide="calendar" class="w-4 h-4"></i>
+          <i data-lucide="calendar" class="w-3.5 h-3.5 text-orange-400"></i>
           <span>Save to Calendar</span>
         </button>
         <button 
           id="detailRegisterBtn" 
           onclick="App.proceedToRegisterFromModal()" 
-          class="px-6 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-bold transition-all shadow-md shadow-brand-500/20 active:scale-95 flex items-center gap-2"
+          class="px-5 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-rose-600 hover:from-orange-600 hover:to-rose-700 text-white text-xs font-black shadow-md shadow-orange-500/25 flex items-center gap-1.5 active:scale-95 transition-all"
         >
-          <i data-lucide="ticket" class="w-4 h-4"></i>
+          <i data-lucide="ticket" class="w-3.5 h-3.5"></i>
           <span>Register Now</span>
         </button>
       </div>
@@ -1016,41 +943,33 @@
   </div>
 
   <!-- =========================================================================
-       MODAL 4: MY PASS WALLET (REGISTERED TICKETS)
+       MODAL 4: PASS WALLET
        ========================================================================= -->
   <div id="walletModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto">
-    <div class="modal-enter w-full max-w-2xl bg-slate-900 border border-slate-700/80 rounded-3xl shadow-2xl overflow-hidden my-8">
+    <div class="campus-modal-in w-full max-w-lg bg-slate-900 border border-slate-700 rounded-3xl shadow-2xl overflow-hidden my-8">
       
-      <div class="p-6 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-brand-600/20 text-brand-400 border border-brand-500/30 flex items-center justify-center">
-            <i data-lucide="wallet" class="w-5 h-5"></i>
-          </div>
-          <div>
-            <h3 class="text-lg font-bold text-white">My Campus Pass Wallet</h3>
-            <p class="text-xs text-slate-400">All your active registrations and digital QR tickets.</p>
-          </div>
+      <div class="p-5 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+        <div>
+          <h3 class="text-base font-bold text-white">My Campus Pass Wallet</h3>
+          <p class="text-xs text-slate-400">Active passes registered under your student profile.</p>
         </div>
-        <button onclick="App.closeWalletModal()" class="p-1.5 rounded-full bg-slate-800 text-slate-400 hover:text-white">
+        <button onclick="App.closeWalletModal()" class="p-1.5 rounded-full text-slate-400 hover:text-white">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
-      <div class="p-6 max-h-[480px] overflow-y-auto">
-        <div id="walletItemsList" class="space-y-4">
-          <!-- Populated dynamically -->
-        </div>
+      <div class="p-5 max-h-[420px] overflow-y-auto">
+        <div id="walletItemsList" class="space-y-3"></div>
 
-        <!-- Empty Wallet State -->
-        <div id="emptyWalletState" class="hidden text-center py-12">
-          <div class="w-12 h-12 rounded-2xl bg-slate-800 flex items-center justify-center mx-auto mb-3 text-slate-500">
-            <i data-lucide="ticket-slash" class="w-6 h-6"></i>
+        <div id="emptyWalletState" class="hidden text-center py-10">
+          <div class="w-12 h-12 rounded-2xl bg-slate-800 flex items-center justify-center mx-auto mb-2 text-slate-500">
+            <i data-lucide="ticket" class="w-6 h-6"></i>
           </div>
-          <h4 class="text-sm font-bold text-white mb-1">No passes in wallet yet</h4>
-          <p class="text-xs text-slate-400 max-w-xs mx-auto mb-4">
-            You haven't registered for any events yet. Browse our upcoming hackathons and cultural fests!
+          <h4 class="text-sm font-bold text-white mb-0.5">No passes in wallet yet</h4>
+          <p class="text-xs text-slate-400 max-w-xs mx-auto mb-3">
+            Register for any upcoming hackathon or festival to generate your entry QR code.
           </p>
-          <button onclick="App.closeWalletModal()" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-bold">
+          <button onclick="App.closeWalletModal()" class="px-4 py-2 rounded-xl bg-orange-500 text-white text-xs font-bold">
             Explore Events
           </button>
         </div>
@@ -1060,138 +979,131 @@
   </div>
 
   <!-- =========================================================================
-       MODAL 5: HOST AN EVENT (ORGANIZER MODE)
+       MODAL 5: HOST AN EVENT (Organizer Mode)
        ========================================================================= -->
   <div id="hostEventModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto">
-    <div class="modal-enter w-full max-w-xl bg-slate-900 border border-slate-700/80 rounded-3xl shadow-2xl overflow-hidden my-8">
+    <div class="campus-modal-in w-full max-w-lg bg-slate-900 border border-slate-700 rounded-3xl shadow-2xl overflow-hidden my-8">
       
-      <div class="p-6 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center">
-            <i data-lucide="calendar-plus" class="w-5 h-5"></i>
-          </div>
-          <div>
-            <h3 class="text-lg font-bold text-white">Host a New Campus Event</h3>
-            <p class="text-xs text-slate-400">Add an event directly to the live Campus Hub catalog.</p>
-          </div>
+      <div class="p-5 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+        <div>
+          <h3 class="text-base font-bold text-white">+ Host a Campus Event</h3>
+          <p class="text-xs text-slate-400">Add an event directly to the live student directory.</p>
         </div>
-        <button onclick="App.closeHostEventModal()" class="p-1.5 rounded-full bg-slate-800 text-slate-400 hover:text-white">
+        <button onclick="App.closeHostEventModal()" class="p-1.5 rounded-full text-slate-400 hover:text-white">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
-      <form id="hostEventForm" onsubmit="App.handleHostEventSubmit(event)" class="p-6 space-y-4">
+      <form id="hostEventForm" onsubmit="App.handleHostEventSubmit(event)" class="p-5 space-y-3.5">
         <div>
-          <label class="block text-xs font-medium text-slate-300 mb-1">Event Title <span class="text-rose-400">*</span></label>
+          <label class="block text-xs font-bold text-slate-300 mb-1">Event Title <span class="text-rose-400">*</span></label>
           <input 
             type="text" 
             id="newEventTitle" 
             required 
-            placeholder="e.g. AI Prompt Engineering Challenge 2026"
-            class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-800 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500"
+            placeholder="e.g. Inter-College RoboCombat 2026"
+            class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-950 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-orange-500"
           />
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label class="block text-xs font-medium text-slate-300 mb-1">Category <span class="text-rose-400">*</span></label>
-            <select id="newEventCategory" class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-800 border border-slate-700 text-slate-100 focus:outline-none focus:border-brand-500">
+            <label class="block text-xs font-bold text-slate-300 mb-1">Category</label>
+            <select id="newEventCategory" class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-950 border border-slate-700 text-slate-100 focus:outline-none focus:border-orange-500 font-medium">
               <option value="tech">Tech & Coding</option>
-              <option value="cultural">Cultural & Arts</option>
-              <option value="gaming">E-Sports & Gaming</option>
-              <option value="sports">Sports & Fitness</option>
-              <option value="workshop">Workshops & AI</option>
-              <option value="career">E-Cell & Pitching</option>
+              <option value="cultural">Cultural & Bands</option>
+              <option value="gaming">E-Sports</option>
+              <option value="sports">Sports & Cricket</option>
+              <option value="workshop">AI Workshops</option>
+              <option value="career">Shark Tank & E-Cell</option>
             </select>
           </div>
           <div>
-            <label class="block text-xs font-medium text-slate-300 mb-1">Organizing Club / Society <span class="text-rose-400">*</span></label>
+            <label class="block text-xs font-bold text-slate-300 mb-1">Organizing Society</label>
             <input 
               type="text" 
               id="newEventClub" 
               required 
-              placeholder="e.g. ACM Student Chapter"
-              class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-800 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500"
+              placeholder="e.g. Robotics Guild"
+              class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-950 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-orange-500"
             />
           </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div>
-            <label class="block text-xs font-medium text-slate-300 mb-1">Date <span class="text-rose-400">*</span></label>
+            <label class="block text-xs font-bold text-slate-300 mb-1">Date</label>
             <input 
               type="date" 
               id="newEventDate" 
               required 
-              class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-800 border border-slate-700 text-slate-100 focus:outline-none focus:border-brand-500"
+              class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-950 border border-slate-700 text-slate-100 focus:outline-none focus:border-orange-500 font-medium"
             />
           </div>
           <div>
-            <label class="block text-xs font-medium text-slate-300 mb-1">Time <span class="text-rose-400">*</span></label>
+            <label class="block text-xs font-bold text-slate-300 mb-1">Time</label>
             <input 
               type="text" 
               id="newEventTime" 
               required 
-              placeholder="e.g. 02:00 PM"
-              class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-800 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500"
+              placeholder="10:00 AM"
+              class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-950 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-orange-500"
             />
           </div>
           <div>
-            <label class="block text-xs font-medium text-slate-300 mb-1">Capacity (Max Seats)</label>
+            <label class="block text-xs font-bold text-slate-300 mb-1">Max Seats</label>
             <input 
               type="number" 
               id="newEventMaxSeats" 
               value="100" 
               min="10" 
-              class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-800 border border-slate-700 text-slate-100 focus:outline-none focus:border-brand-500"
+              class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-950 border border-slate-700 text-slate-100 focus:outline-none focus:border-orange-500 font-medium"
             />
           </div>
         </div>
 
         <div>
-          <label class="block text-xs font-medium text-slate-300 mb-1">Venue <span class="text-rose-400">*</span></label>
+          <label class="block text-xs font-bold text-slate-300 mb-1">Venue</label>
           <input 
             type="text" 
             id="newEventVenue" 
             required 
-            placeholder="e.g. CS Seminar Hall 1"
-            class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-800 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500"
+            placeholder="e.g. Seminar Hall 3, Block B"
+            class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-950 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-orange-500"
           />
         </div>
 
         <div>
-          <label class="block text-xs font-medium text-slate-300 mb-1">Description <span class="text-rose-400">*</span></label>
+          <label class="block text-xs font-bold text-slate-300 mb-1">Description</label>
           <textarea 
             id="newEventDescription" 
             rows="3" 
             required 
-            placeholder="Describe what attendees can expect, tracks, guidelines..."
-            class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-800 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500"
+            placeholder="Describe what students will experience, rules, swag..."
+            class="w-full px-3.5 py-2 text-xs rounded-xl bg-slate-950 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-orange-500"
           ></textarea>
         </div>
 
-        <div class="pt-3 border-t border-slate-800 flex items-center justify-end gap-3">
+        <div class="pt-3 border-t border-slate-800 flex items-center justify-end gap-2">
           <button 
             type="button" 
             onclick="App.closeHostEventModal()" 
-            class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold"
+            class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold"
           >
             Cancel
           </button>
           <button 
             type="submit" 
-            class="px-6 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-md shadow-emerald-500/20"
+            class="px-5 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-rose-600 hover:from-orange-600 hover:to-rose-700 text-white text-xs font-black shadow-md shadow-orange-500/20"
           >
-            Publish to Campus Hub
+            Publish to Hub
           </button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- =========================================================================
-       TOAST NOTIFICATION CONTAINER
-       ========================================================================= -->
+  <!-- Toast Container -->
   <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
   <!-- Scripts -->

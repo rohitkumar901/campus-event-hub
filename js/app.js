@@ -1,6 +1,6 @@
 /**
  * Campus Event Hub (CampusVibe)
- * Vibrant Collegiate Life & Festival Engine
+ * Championship Edition — High-Energy Collegiate Festival & Management Engine
  */
 
 const App = (() => {
@@ -19,9 +19,11 @@ const App = (() => {
     wizardStep: 1,
     activeRegistrationEvent: null,
     activeDetailEvent: null,
+    pollVotes: { hack: 48, tarang: 32, esports: 20 },
+    hasVoted: false
   };
 
-  // Acoustic Sound FX
+  // Acoustic Web Audio Synthesizer
   const AudioEngine = {
     ctx: null,
     init() {
@@ -69,6 +71,7 @@ const App = (() => {
     }
   };
 
+  // Local Storage
   function loadLocalData() {
     try {
       const storedEvents = localStorage.getItem("campus_events_list_vibe");
@@ -79,6 +82,14 @@ const App = (() => {
 
       const storedBookmarks = localStorage.getItem("campus_user_bookmarks");
       state.bookmarks = storedBookmarks ? JSON.parse(storedBookmarks) : [];
+
+      const storedVotes = localStorage.getItem("campus_poll_votes");
+      if (storedVotes) {
+        state.pollVotes = JSON.parse(storedVotes);
+      }
+
+      const hasVotedStored = localStorage.getItem("campus_has_voted");
+      if (hasVotedStored) state.hasVoted = true;
 
       const storedTheme = localStorage.getItem("campus_theme_pref");
       if (storedTheme === "light") {
@@ -277,7 +288,7 @@ const App = (() => {
       return `
         <div class="campus-card bg-slate-900 border-2 border-slate-800 rounded-3xl overflow-hidden flex flex-col justify-between group ${ev.borderClass || ''}">
           
-          <!-- Image Header with Vibrant Badges -->
+          <!-- Image Header with Badges -->
           <div class="relative h-48 bg-slate-950 cursor-pointer overflow-hidden" onclick="App.openEventDetailsModal('${ev.id}')">
             <img 
               src="${ev.image}" 
@@ -632,6 +643,7 @@ const App = (() => {
     saveLocalRegistrations();
     updateCategoryBadges();
     renderEventsGrid();
+    populateQuickPassSelect();
 
     closeRegistrationModal();
     fireConfetti();
@@ -901,6 +913,7 @@ const App = (() => {
       saveLocalRegistrations();
       updateCategoryBadges();
       renderEventsGrid();
+      populateQuickPassSelect();
       openWalletModal();
       showToast("Cancelled", "Registration pass cancelled successfully.");
     }
@@ -985,6 +998,174 @@ const App = (() => {
     fireConfetti();
     AudioEngine.playSuccess();
     showToast("Event Created! 🚀", `"${title}" is now published on the Campus Hub.`, "success");
+  }
+
+  // NEW FEATURE 1: Campus Map Modal
+  function openCampusMapModal() {
+    AudioEngine.playClick();
+    document.getElementById("campusMapModal").classList.remove("hidden");
+    if (window.lucide) lucide.createIcons();
+  }
+
+  function closeCampusMapModal() {
+    AudioEngine.playClick();
+    document.getElementById("campusMapModal").classList.add("hidden");
+  }
+
+  function selectMapZone(zone) {
+    AudioEngine.playClick();
+    const titleEl = document.getElementById("zoneTitle");
+    const descEl = document.getElementById("zoneDesc");
+
+    const zoneData = {
+      audi: {
+        title: "Main Campus Auditorium & Innovation Labs",
+        desc: "Hosts HACK-CAMPUS 2026 & AI Hackathons. Entry via Turnstile Gate 1 with College ID."
+      },
+      oat: {
+        title: "Open Air Amphitheatre (OAT)",
+        desc: "Hosts TARANG 2026 Battle of Campus Bands & EDM Night. Capacity 800+ students."
+      },
+      esports: {
+        title: "E-Sports Gaming Arena (Block C, Level 2)",
+        desc: "Hosts Valorant & BGMI Tournament. High-speed LAN setups & shoutcaster desk."
+      },
+      stadium: {
+        title: "Campus Main Sports Stadium",
+        desc: "Hosts Floodlight T-10 Cricket Tournament. Grandstand bleachers & spectator food stalls."
+      }
+    };
+
+    if (zoneData[zone]) {
+      titleEl.textContent = zoneData[zone].title;
+      descEl.textContent = zoneData[zone].desc;
+    }
+  }
+
+  // NEW FEATURE 2: Turnstile Gate Security Check-in Simulator
+  function openGateCheckinModal() {
+    AudioEngine.playClick();
+    populateQuickPassSelect();
+    document.getElementById("gateCheckinModal").classList.remove("hidden");
+    if (window.lucide) lucide.createIcons();
+  }
+
+  function closeGateCheckinModal() {
+    AudioEngine.playClick();
+    document.getElementById("gateCheckinModal").classList.add("hidden");
+  }
+
+  function populateQuickPassSelect() {
+    const sel = document.getElementById("quickPassSelect");
+    if (!sel) return;
+
+    if (state.registrations.length === 0) {
+      sel.innerHTML = `<option value="">-- No passes created yet (Register for an event first) --</option>`;
+    } else {
+      sel.innerHTML = `<option value="">-- Choose from your generated passes --</option>` +
+        state.registrations.map(r => `<option value="${r.id}">${r.id} - ${r.studentName} (${r.eventTitle.slice(0, 25)}...)</option>`).join("");
+    }
+  }
+
+  function handleQuickPassSelect() {
+    const sel = document.getElementById("quickPassSelect");
+    const inp = document.getElementById("manualPassIdInput");
+    if (sel && inp && sel.value) {
+      inp.value = sel.value;
+    }
+  }
+
+  function verifyGateCheckin() {
+    AudioEngine.playClick();
+    const inputVal = (document.getElementById("manualPassIdInput").value || "").trim().toUpperCase();
+    const resultBox = document.getElementById("checkinResultBox");
+    const detailsEl = document.getElementById("checkinStudentDetails");
+    const timeEl = document.getElementById("checkinTimestamp");
+
+    if (!inputVal) {
+      showToast("Pass ID Required", "Please select or type a Pass ID.", "info");
+      return;
+    }
+
+    const reg = state.registrations.find(r => r.id.toUpperCase() === inputVal);
+
+    if (reg) {
+      resultBox.classList.remove("hidden");
+      detailsEl.textContent = `${reg.studentName} (#${reg.studentRoll}) • ${reg.eventTitle} • Gate 2 Verified ✓`;
+      timeEl.textContent = `Turnstile Check-in recorded at ${new Date().toLocaleTimeString()}`;
+      AudioEngine.playSuccess();
+      fireConfetti();
+      showToast("Entry Verified ✅", `Access granted for ${reg.studentName}.`, "success");
+    } else {
+      resultBox.classList.remove("hidden");
+      detailsEl.textContent = `Pass ID "${inputVal}" is verified valid in demo turnstile mode.`;
+      timeEl.textContent = `Entry recorded at ${new Date().toLocaleTimeString()}`;
+      AudioEngine.playSuccess();
+      showToast("Verified", `Pass ${inputVal} checked in.`, "success");
+    }
+    if (window.lucide) lucide.createIcons();
+  }
+
+  // NEW FEATURE 3: Campus Student Poll
+  function votePoll(option) {
+    if (state.hasVoted) {
+      showToast("Already Voted", "You have already cast your vote in this week's campus poll!", "info");
+      return;
+    }
+    AudioEngine.playClick();
+    state.pollVotes[option] = (state.pollVotes[option] || 0) + 1;
+    state.hasVoted = true;
+
+    localStorage.setItem("campus_poll_votes", JSON.stringify(state.pollVotes));
+    localStorage.setItem("campus_has_voted", "true");
+
+    updatePollUI();
+    fireConfetti();
+    showToast("Vote Counted! 🗳️", "Your campus choice has been recorded.", "success");
+  }
+
+  function updatePollUI() {
+    const total = (state.pollVotes.hack || 1) + (state.pollVotes.tarang || 1) + (state.pollVotes.esports || 1);
+    const pHack = Math.round((state.pollVotes.hack / total) * 100);
+    const pTarang = Math.round((state.pollVotes.tarang / total) * 100);
+    const pEsports = 100 - pHack - pTarang;
+
+    const elH = document.getElementById("pollCountHack");
+    const elT = document.getElementById("pollCountTarang");
+    const elE = document.getElementById("pollCountEsports");
+
+    if (elH) elH.textContent = pHack + "%";
+    if (elT) elT.textContent = pTarang + "%";
+    if (elE) elE.textContent = pEsports + "%";
+  }
+
+  // NEW FEATURE 4: Campus Broadcasts Drawer
+  function toggleAnnouncementsDrawer() {
+    AudioEngine.playClick();
+    const d = document.getElementById("announcementsDrawer");
+    if (d) d.classList.toggle("hidden");
+  }
+
+  // NEW FEATURE 5: AI Campus Bot Concierge
+  function toggleCampusBot() {
+    AudioEngine.playClick();
+    const pop = document.getElementById("campusBotPopover");
+    if (pop) pop.classList.toggle("hidden");
+  }
+
+  function answerBot(topic) {
+    AudioEngine.playClick();
+    const box = document.getElementById("botAnswerBox");
+    if (!box) return;
+
+    box.classList.remove("hidden");
+    if (topic === 'audi') {
+      box.innerHTML = `<strong>📍 Main Auditorium:</strong> Located in Block A, 3 mins walk from Central Fountain. Registration desk is at Turnstile Gate 1.`;
+    } else if (topic === 'food') {
+      box.innerHTML = `<strong>🍕 Food & Swag:</strong> Free midnight pizzas and Red Bull drinks are provided for all 36h Hackathon and Tarang Pass holders!`;
+    } else if (topic === 'pass') {
+      box.innerHTML = `<strong>🎟️ Pass Download:</strong> Click 'My Passes' on top navigation, then click 'View Pass' to print or save your pass with QR code anytime!`;
+    }
   }
 
   // Calendar .ICS
@@ -1140,6 +1321,8 @@ const App = (() => {
         closeDetailsModal();
         closeWalletModal();
         closeHostEventModal();
+        closeCampusMapModal();
+        closeGateCheckinModal();
       }
     });
 
@@ -1273,6 +1456,7 @@ const App = (() => {
       renderEventsGrid();
       initLiveCountdown();
       initLiveTicker();
+      updatePollUI();
 
       if (window.lucide) lucide.createIcons();
     },
@@ -1300,7 +1484,19 @@ const App = (() => {
     exportTicketToCalendar,
     downloadDetailIcs,
     exportAllEventsToCalendar,
-    resetFilters
+    resetFilters,
+    // Upgraded Features:
+    openCampusMapModal,
+    closeCampusMapModal,
+    selectMapZone,
+    openGateCheckinModal,
+    closeGateCheckinModal,
+    verifyGateCheckin,
+    handleQuickPassSelect,
+    votePoll,
+    toggleAnnouncementsDrawer,
+    toggleCampusBot,
+    answerBot
   };
 })();
 

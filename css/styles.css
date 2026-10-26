@@ -1,6 +1,5 @@
 /* ==========================================================================
-   Campus Event Hub - Vibrant Collegiate Fest Aesthetic
-   Youthful, Energetic, High-Contrast Campus Life Styling
+   Campus Event Hub - High-Energy Collegiate Festival Design System
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
@@ -16,36 +15,28 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Vibrant Card Hover Effects */
+/* Card Transitions */
 .campus-card {
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .campus-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 16px 30px -10px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.5);
 }
 
 /* Category Accent Glow Borders */
-.cat-border-tech:hover { border-color: #3b82f6; }
-.cat-border-cultural:hover { border-color: #ec4899; }
-.cat-border-gaming:hover { border-color: #f97316; }
-.cat-border-sports:hover { border-color: #10b981; }
-.cat-border-workshop:hover { border-color: #06b6d4; }
-.cat-border-career:hover { border-color: #eab308; }
-
-/* Category Pills with personality */
-.pill-active-tech { background: #2563eb !important; color: #fff !important; border-color: #3b82f6 !important; }
-.pill-active-cultural { background: #db2777 !important; color: #fff !important; border-color: #f472b6 !important; }
-.pill-active-gaming { background: #ea580c !important; color: #fff !important; border-color: #fb923c !important; }
-.pill-active-sports { background: #059669 !important; color: #fff !important; border-color: #34d399 !important; }
-.pill-active-workshop { background: #0891b2 !important; color: #fff !important; border-color: #22d3ee !important; }
-.pill-active-career { background: #ca8a04 !important; color: #fff !important; border-color: #facc15 !important; }
+.cat-border-tech:hover { border-color: #3b82f6 !important; }
+.cat-border-cultural:hover { border-color: #ec4899 !important; }
+.cat-border-gaming:hover { border-color: #f97316 !important; }
+.cat-border-sports:hover { border-color: #10b981 !important; }
+.cat-border-workshop:hover { border-color: #06b6d4 !important; }
+.cat-border-career:hover { border-color: #eab308 !important; }
 
 /* Authentic College Fest Pass / Lanyard Badge Styling */
 .fest-pass {
   position: relative;
-  border-radius: 20px;
+  border-radius: 24px;
   background: #111827;
   border: 2px solid #374151;
   overflow: hidden;
@@ -58,7 +49,7 @@ body {
 
 /* Lanyard punch hole at top */
 .lanyard-hole {
-  width: 44px;
+  width: 48px;
   height: 9px;
   background: #030712;
   border-radius: 9999px;
@@ -75,8 +66,8 @@ body {
 .pass-notch-l, .pass-notch-r {
   position: absolute;
   top: 67%;
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: #030712;
   z-index: 10;
@@ -86,40 +77,21 @@ body {
   background: #f3f4f6;
 }
 
-.pass-notch-l { left: -11px; }
-.pass-notch-r { right: -11px; }
+.pass-notch-l { left: -12px; }
+.pass-notch-r { right: -12px; }
 
 .pass-tear-line {
   position: absolute;
   top: 67%;
   left: 14px;
   right: 14px;
-  margin-top: 10px;
+  margin-top: 11px;
   border-top: 2px dashed #4b5563;
   z-index: 5;
 }
 
 .light .pass-tear-line {
   border-top: 2px dashed #d1d5db;
-}
-
-/* Custom Scrollbars */
-::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2);
-}
-
-::-webkit-scrollbar-thumb {
-  background: #4b5563;
-  border-radius: 9999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #6b7280;
 }
 
 /* Modal Animations */
@@ -130,12 +102,53 @@ body {
 @keyframes modalScale {
   0% {
     opacity: 0;
-    transform: scale(0.96) translateY(10px);
+    transform: scale(0.96) translateY(12px);
   }
   100% {
     opacity: 1;
     transform: scale(1) translateY(0);
   }
+}
+
+/* Interactive Campus Map SVG Styling */
+.map-building {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.map-building:hover {
+  filter: brightness(1.2);
+  stroke-width: 3px;
+}
+
+/* Pulse Beacon */
+@keyframes mapPulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 0.4; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.pulse-marker {
+  animation: mapPulse 2s infinite ease-in-out;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
 }
 
 /* Print View for physical festival pass */

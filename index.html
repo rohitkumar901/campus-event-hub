@@ -22,7 +22,6 @@
               dark: '#0B101B',
               card: '#131B2E',
               border: 'rgba(255, 255, 255, 0.08)',
-              subtle: '#1E293B',
               tech: '#3B82F6',
               cultural: '#EC4899',
               gaming: '#F97316',
@@ -57,7 +56,7 @@
   <div class="bg-gradient-to-r from-blue-900 via-indigo-900 to-rose-900 border-b border-white/10 py-2 px-4 text-xs font-semibold text-white overflow-hidden shadow-sm">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <div class="flex items-center gap-2 overflow-hidden">
-        <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-red-500 text-white text-[10px] uppercase font-black tracking-wider shrink-0 shadow-sm animate-pulse">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-red-500 text-white text-[10px] uppercase font-black tracking-wider shrink-0 shadow-sm animate-pulse">
           CAMPUS LIVE
         </span>
         <div id="liveTickerText" class="truncate transition-opacity duration-300 font-medium text-amber-200 text-xs">
@@ -75,7 +74,7 @@
        TOP NAVIGATION BAR
        ========================================================================= -->
   <header class="sticky top-0 z-40 bg-[#0B101B]/95 backdrop-blur-md border-b border-slate-800 transition-all">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
       
       <!-- Brand Logo -->
       <a href="#" class="flex items-center gap-2.5 group">
@@ -92,7 +91,7 @@
       </a>
 
       <!-- Quick Search Bar -->
-      <div class="hidden md:flex flex-1 max-w-md mx-4 relative">
+      <div class="hidden md:flex flex-1 max-w-md mx-3 relative">
         <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
         <input 
           type="text" 
@@ -103,18 +102,40 @@
         <kbd class="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">⌘K</kbd>
       </div>
 
-      <!-- Action Items -->
-      <div class="flex items-center gap-2 sm:gap-3">
+      <!-- Action Items & Navigation Controls -->
+      <div class="flex items-center gap-2 sm:gap-2.5">
         
         <!-- Navigation View Tabs -->
-        <nav class="hidden lg:flex items-center gap-1 text-xs font-semibold">
-          <button id="navExploreBtn" class="px-3.5 py-2 rounded-xl text-white bg-slate-800 font-bold border border-slate-700 transition-colors">
-            Explore Events
+        <nav class="hidden lg:flex items-center gap-1 text-xs font-bold">
+          <button id="navExploreBtn" class="px-3 py-1.5 rounded-xl text-white bg-slate-800 border border-slate-700 transition-colors">
+            Events
           </button>
-          <button id="navScheduleBtn" class="px-3.5 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
-            Schedule View
+          <button id="navScheduleBtn" class="px-3 py-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+            Schedule
           </button>
         </nav>
+
+        <!-- Interactive Campus Map Button -->
+        <button 
+          id="openCampusMapBtn"
+          onclick="App.openCampusMapModal()"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 text-xs font-bold transition-all shadow-sm"
+          title="Interactive Campus Venue Map"
+        >
+          <i data-lucide="map-pin" class="w-4 h-4 text-rose-400"></i>
+          <span class="hidden xl:inline">Campus Map</span>
+        </button>
+
+        <!-- Gate Check-in Simulator Button (Organizer Tool) -->
+        <button 
+          id="openScannerBtn"
+          onclick="App.openGateCheckinModal()"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 text-xs font-bold transition-all shadow-sm"
+          title="Gate Security QR Check-in Simulator"
+        >
+          <i data-lucide="scan-line" class="w-4 h-4 text-emerald-400"></i>
+          <span class="hidden xl:inline">Gate Scanner</span>
+        </button>
 
         <!-- My Passes Wallet Button -->
         <button 
@@ -123,20 +144,31 @@
           title="View your registered event passes"
         >
           <i data-lucide="ticket" class="w-4 h-4 text-orange-400"></i>
-          <span class="hidden sm:inline">My Passes</span>
-          <span id="walletCountBadge" class="ml-1 px-1.5 py-0.2 rounded-full text-[10px] bg-orange-500 text-white font-mono font-bold">0</span>
+          <span class="hidden sm:inline">Passes</span>
+          <span id="walletCountBadge" class="ml-0.5 px-1.5 py-0.2 rounded-full text-[10px] bg-orange-500 text-white font-mono font-bold">0</span>
         </button>
 
-        <!-- Host an Event (Organizer Mode Button) -->
+        <!-- Host Event Button -->
         <button 
           id="openHostEventBtn"
           class="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-orange-500 to-rose-600 hover:from-orange-600 hover:to-rose-700 text-white text-xs font-extrabold transition-all shadow-md shadow-orange-500/20 active:scale-95"
         >
-          <i data-lucide="plus-circle" class="w-4 h-4"></i>
-          <span>+ Host Event</span>
+          <i data-lucide="plus" class="w-4 h-4"></i>
+          <span>Host</span>
         </button>
 
-        <!-- Audio Toggle -->
+        <!-- Campus Broadcasts Bell Drawer -->
+        <button 
+          id="openAnnouncementsBtn"
+          onclick="App.toggleAnnouncementsDrawer()"
+          class="relative p-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 hover:text-white transition-colors"
+          title="Campus Broadcast Notifications"
+        >
+          <i data-lucide="bell" class="w-4 h-4"></i>
+          <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-rose-500"></span>
+        </button>
+
+        <!-- Sound Toggle -->
         <button 
           id="toggleSoundBtn"
           class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 hover:text-white transition-colors"
@@ -155,8 +187,8 @@
         </button>
 
         <!-- Student Profile Pill -->
-        <div class="hidden xl:flex items-center gap-2.5 pl-2 border-l border-slate-800">
-          <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-400 to-orange-500 flex items-center justify-center font-black text-xs text-slate-950 ring-2 ring-orange-500/30">
+        <div class="hidden 2xl:flex items-center gap-2 pl-2 border-l border-slate-800">
+          <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-400 to-orange-500 flex items-center justify-center font-black text-xs text-slate-950">
             AV
           </div>
           <div class="text-left leading-tight text-xs">
@@ -211,7 +243,7 @@
           <div class="text-xs font-bold text-slate-300 mt-0.5">Total Prize Pool</div>
         </div>
         <div class="bg-slate-900/90 border border-emerald-500/30 p-4 rounded-2xl text-center shadow-lg">
-          <div class="text-2xl font-black text-emerald-400 font-mono">1,930+</div>
+          <div class="text-2xl font-black text-emerald-400 font-mono" id="statLiveRegistered">1,930+</div>
           <div class="text-xs font-bold text-slate-300 mt-0.5">Registered Students</div>
         </div>
         <div class="bg-slate-900/90 border border-pink-500/30 p-4 rounded-2xl text-center shadow-lg">
@@ -303,6 +335,43 @@
 
       </div>
 
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       CAMPUS INTERACTIVE POLL & BUZZ BAR (NEW FEATURE)
+       ========================================================================= -->
+  <section class="py-4 border-b border-slate-800 bg-[#0d1424]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-slate-900 border border-slate-800 shadow-md">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center shrink-0">
+            <i data-lucide="vote" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-black uppercase text-orange-400">Student Poll of the Week</span>
+              <span class="px-2 py-0.2 rounded-full text-[9px] bg-red-500/20 text-red-400 font-bold uppercase">LIVE</span>
+            </div>
+            <div class="text-sm font-bold text-white">Which event are you most hyped about?</div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap w-full md:w-auto" id="pollOptionsContainer">
+          <button onclick="App.votePoll('hack')" id="pollBtnHack" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-blue-600/30 border border-blue-500/30 text-xs font-bold text-blue-300 transition-all flex items-center gap-1.5">
+            <span>💻 36h Hackathon</span>
+            <span class="px-1.5 py-0.2 rounded bg-black/40 text-[10px] font-mono" id="pollCountHack">48%</span>
+          </button>
+          <button onclick="App.votePoll('tarang')" id="pollBtnTarang" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-pink-600/30 border border-pink-500/30 text-xs font-bold text-pink-300 transition-all flex items-center gap-1.5">
+            <span>🎸 Tarang Band Battle</span>
+            <span class="px-1.5 py-0.2 rounded bg-black/40 text-[10px] font-mono" id="pollCountTarang">32%</span>
+          </button>
+          <button onclick="App.votePoll('esports')" id="pollBtnEsports" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-orange-600/30 border border-orange-500/30 text-xs font-bold text-orange-300 transition-all flex items-center gap-1.5">
+            <span>🎮 Valorant Clutch</span>
+            <span class="px-1.5 py-0.2 rounded bg-black/40 text-[10px] font-mono" id="pollCountEsports">20%</span>
+          </button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -462,6 +531,192 @@
       </div>
     </div>
   </footer>
+
+  <!-- =========================================================================
+       NEW MODAL: INTERACTIVE CAMPUS VENUE MAP
+       ========================================================================= -->
+  <div id="campusMapModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm overflow-y-auto">
+    <div class="campus-modal-in w-full max-w-3xl bg-slate-900 border border-slate-700 rounded-3xl shadow-2xl overflow-hidden my-8">
+      
+      <div class="p-6 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-rose-500/20 text-rose-400 border border-rose-500/30">GPS NAVIGATOR</span>
+            <h3 class="text-lg font-black text-white">Campus Festival Venue Map</h3>
+          </div>
+          <p class="text-xs text-slate-400 mt-0.5">Click any campus zone to view active events, entry gates & directions.</p>
+        </div>
+        <button onclick="App.closeCampusMapModal()" class="p-1.5 rounded-full text-slate-400 hover:text-white">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="p-6">
+        <!-- Interactive Vector Map Area -->
+        <div class="relative bg-slate-950 border border-slate-800 rounded-2xl p-4 overflow-hidden mb-4">
+          <svg viewBox="0 0 800 450" class="w-full h-auto rounded-xl">
+            <!-- Ground & Roads -->
+            <rect width="800" height="450" fill="#0B101B" />
+            <path d="M 50 220 L 750 220 M 400 30 L 400 420 M 150 100 L 650 340" stroke="#1E293B" stroke-width="16" stroke-linecap="round" />
+            
+            <!-- Zone 1: Main Auditorium -->
+            <g class="map-building" onclick="App.selectMapZone('audi')">
+              <rect x="80" y="60" width="180" height="110" rx="12" fill="#1E3A8A" stroke="#3B82F6" stroke-width="2" />
+              <text x="170" y="110" fill="#FFFFFF" font-size="13" font-weight="bold" text-anchor="middle">🏛️ Main Auditorium</text>
+              <text x="170" y="130" fill="#93C5FD" font-size="10" text-anchor="middle">HACK-CAMPUS 2026 (Gate 1)</text>
+              <circle cx="240" cy="80" r="6" fill="#3B82F6" class="pulse-marker" />
+            </g>
+
+            <!-- Zone 2: Open Air Amphitheatre (OAT) -->
+            <g class="map-building" onclick="App.selectMapZone('oat')">
+              <rect x="520" y="60" width="200" height="110" rx="12" fill="#831843" stroke="#EC4899" stroke-width="2" />
+              <text x="620" y="110" fill="#FFFFFF" font-size="13" font-weight="bold" text-anchor="middle">🎸 Amphitheatre (OAT)</text>
+              <text x="620" y="130" fill="#F472B6" font-size="10" text-anchor="middle">TARANG Battle of Bands</text>
+              <circle cx="700" cy="80" r="6" fill="#EC4899" class="pulse-marker" />
+            </g>
+
+            <!-- Zone 3: E-Sports Arena (Block C) -->
+            <g class="map-building" onclick="App.selectMapZone('esports')">
+              <rect x="80" y="270" width="180" height="120" rx="12" fill="#7C2D12" stroke="#F97316" stroke-width="2" />
+              <text x="170" y="325" fill="#FFFFFF" font-size="13" font-weight="bold" text-anchor="middle">🎮 E-Sports Arena</text>
+              <text x="170" y="345" fill="#FDBA74" font-size="10" text-anchor="middle">Valorant & BGMI (Block C)</text>
+              <circle cx="240" cy="290" r="6" fill="#F97316" class="pulse-marker" />
+            </g>
+
+            <!-- Zone 4: Main Sports Stadium Ground -->
+            <g class="map-building" onclick="App.selectMapZone('stadium')">
+              <rect x="520" y="270" width="200" height="120" rx="12" fill="#064E3B" stroke="#10B981" stroke-width="2" />
+              <text x="620" y="325" fill="#FFFFFF" font-size="13" font-weight="bold" text-anchor="middle">🏏 Main Sports Stadium</text>
+              <text x="620" y="345" fill="#6EE7B7" font-size="10" text-anchor="middle">Cricket T-10 League</text>
+              <circle cx="700" cy="290" r="6" fill="#10B981" class="pulse-marker" />
+            </g>
+
+            <!-- Central Hub -->
+            <circle cx="400" cy="220" r="30" fill="#F59E0B" opacity="0.3" />
+            <circle cx="400" cy="220" r="16" fill="#F59E0B" />
+            <text x="400" y="225" fill="#000000" font-size="11" font-weight="900" text-anchor="middle">YOU</text>
+          </svg>
+        </div>
+
+        <!-- Selected Zone Details Card -->
+        <div id="mapZoneDetails" class="p-4 rounded-2xl bg-slate-950 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div class="text-[10px] font-black uppercase text-orange-400">Selected Location Info</div>
+            <div class="text-base font-bold text-white" id="zoneTitle">Main Campus Auditorium</div>
+            <p class="text-xs text-slate-400 mt-0.5" id="zoneDesc">Hosts HACK-CAMPUS 2026. Entry through Security Gate 1 & Turnstile Alpha.</p>
+          </div>
+          <button onclick="showToast('Route Calculated', 'Walking directions pinned: 3 mins from Central Lawn.', 'success')" class="px-4 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white text-xs font-black shrink-0">
+            Get Directions 🧭
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       NEW MODAL: GATE SECURITY QR CHECK-IN SIMULATOR (ORGANIZER MODE)
+       ========================================================================= -->
+  <div id="gateCheckinModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm overflow-y-auto">
+    <div class="campus-modal-in w-full max-w-lg bg-slate-900 border border-slate-700 rounded-3xl shadow-2xl overflow-hidden my-8">
+      
+      <div class="p-6 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">ORGANIZER SCANNER</span>
+            <h3 class="text-lg font-black text-white">Turnstile Gate Check-in</h3>
+          </div>
+          <p class="text-xs text-slate-400 mt-0.5">Simulate ticket scanning & mark student attendance in real time.</p>
+        </div>
+        <button onclick="App.closeGateCheckinModal()" class="p-1.5 rounded-full text-slate-400 hover:text-white">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-4">
+        <!-- Scan Simulation Viewfinder -->
+        <div class="relative h-44 bg-slate-950 rounded-2xl border-2 border-dashed border-emerald-500/40 flex flex-col items-center justify-center p-4 text-center overflow-hidden">
+          <div class="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-2 animate-pulse">
+            <i data-lucide="scan" class="w-8 h-8"></i>
+          </div>
+          <div class="text-xs font-bold text-white">Security Turnstile Active</div>
+          <p class="text-[11px] text-slate-400 mt-0.5">Select any generated pass below or enter Pass ID to verify admission.</p>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">Select from Your Registered Passes:</label>
+          <select id="quickPassSelect" onchange="App.handleQuickPassSelect()" class="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-950 border border-slate-700 text-slate-100 font-medium focus:outline-none focus:border-emerald-500">
+            <!-- Populated via JS -->
+          </select>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <input 
+            type="text" 
+            id="manualPassIdInput"
+            placeholder="Or enter Pass ID (e.g. CEH-849120)" 
+            class="flex-1 px-3.5 py-2 text-xs rounded-xl bg-slate-950 border border-slate-700 text-slate-100 font-mono placeholder-slate-500 focus:outline-none focus:border-emerald-500 uppercase"
+          />
+          <button 
+            onclick="App.verifyGateCheckin()"
+            class="px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black flex items-center gap-1.5 transition-all shadow-md shadow-emerald-500/20"
+          >
+            <i data-lucide="check" class="w-4 h-4"></i>
+            <span>Verify & Admit</span>
+          </button>
+        </div>
+
+        <!-- Verification Result Banner -->
+        <div id="checkinResultBox" class="hidden p-4 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 text-emerald-300 space-y-1">
+          <div class="flex items-center gap-2 font-black text-sm text-white">
+            <i data-lucide="badge-check" class="w-5 h-5 text-emerald-400"></i>
+            <span>PASS VALIDATED — ENTRY APPROVED</span>
+          </div>
+          <div class="text-xs" id="checkinStudentDetails">Aryan Verma (#24BCS108) • Gate 2 Verified</div>
+          <div class="text-[10px] text-emerald-400 font-mono" id="checkinTimestamp">Checked in at 12:00 PM</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       CAMPUS BROADCASTS DRAWER
+       ========================================================================= -->
+  <div id="announcementsDrawer" class="fixed top-16 right-4 z-50 hidden w-80 bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden campus-modal-in">
+    <div class="p-3.5 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+      <div class="flex items-center gap-1.5 text-xs font-bold text-white">
+        <i data-lucide="bell" class="w-4 h-4 text-orange-400"></i>
+        <span>Campus Broadcasts</span>
+      </div>
+      <button onclick="App.toggleAnnouncementsDrawer()" class="text-slate-400 hover:text-white">
+        <i data-lucide="x" class="w-3.5 h-3.5"></i>
+      </button>
+    </div>
+    <div class="p-3 space-y-2.5 max-h-72 overflow-y-auto text-xs">
+      <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800">
+        <div class="flex items-center justify-between text-[10px] font-bold text-orange-400 mb-0.5">
+          <span>🍕 Swag & Snacks</span>
+          <span>10 mins ago</span>
+        </div>
+        <p class="text-slate-300">Midnight Pizza Party sponsored by GDSC confirmed for Day 1 12:00 AM!</p>
+      </div>
+      <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800">
+        <div class="flex items-center justify-between text-[10px] font-bold text-pink-400 mb-0.5">
+          <span>🎸 Tarang Soundcheck</span>
+          <span>1 hour ago</span>
+        </div>
+        <p class="text-slate-300">Band soundchecks begin at 03:00 PM in Open Air Amphitheatre.</p>
+      </div>
+      <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800">
+        <div class="flex items-center justify-between text-[10px] font-bold text-blue-400 mb-0.5">
+          <span>⚡ API Keys Active</span>
+          <span>3 hours ago</span>
+        </div>
+        <p class="text-slate-300">Free $100 Cloud API keys issued for all Gen-AI workshop participants.</p>
+      </div>
+    </div>
+  </div>
 
   <!-- =========================================================================
        MODAL 1: REGISTRATION WIZARD (Colorful 3-Step Wizard)
@@ -1100,6 +1355,54 @@
           </button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       FLOATING CAMPUS BOT WIDGET (EVENT ASSISTANT)
+       ========================================================================= -->
+  <div class="fixed bottom-5 left-5 z-40">
+    <button 
+      id="campusBotToggleBtn"
+      onclick="App.toggleCampusBot()"
+      class="flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-gradient-to-r from-orange-500 to-rose-600 text-white text-xs font-black shadow-xl shadow-orange-500/30 hover:scale-105 transition-all active:scale-95"
+    >
+      <i data-lucide="bot" class="w-4 h-4"></i>
+      <span>Ask CampusBot</span>
+    </button>
+  </div>
+
+  <!-- CampusBot Chat Popover -->
+  <div id="campusBotPopover" class="fixed bottom-16 left-5 z-50 hidden w-80 bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden campus-modal-in">
+    <div class="p-3.5 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+      <div class="flex items-center gap-2 text-xs font-bold text-white">
+        <div class="w-6 h-6 rounded-lg bg-orange-500 flex items-center justify-center text-white">
+          <i data-lucide="bot" class="w-3.5 h-3.5"></i>
+        </div>
+        <span>CampusVibe Assistant</span>
+      </div>
+      <button onclick="App.toggleCampusBot()" class="text-slate-400 hover:text-white">
+        <i data-lucide="x" class="w-3.5 h-3.5"></i>
+      </button>
+    </div>
+    <div class="p-3 text-xs space-y-3">
+      <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-300">
+        👋 Hey Aryan! Need quick info about campus events, prizes, or gate entries? Tap below:
+      </div>
+      <div class="space-y-1.5">
+        <button onclick="App.answerBot('audi')" class="w-full text-left p-2 rounded-lg bg-slate-800/80 hover:bg-slate-800 text-orange-300 font-bold transition-colors">
+          📍 Where is the Hackathon venue?
+        </button>
+        <button onclick="App.answerBot('food')" class="w-full text-left p-2 rounded-lg bg-slate-800/80 hover:bg-slate-800 text-emerald-300 font-bold transition-colors">
+          🍕 Is food provided at events?
+        </button>
+        <button onclick="App.answerBot('pass')" class="w-full text-left p-2 rounded-lg bg-slate-800/80 hover:bg-slate-800 text-pink-300 font-bold transition-colors">
+          🎟️ How do I download my pass?
+        </button>
+      </div>
+      <div id="botAnswerBox" class="hidden p-2.5 rounded-xl bg-orange-500/10 border border-orange-500/30 text-orange-200 text-[11px] leading-relaxed">
+        <!-- Injected -->
+      </div>
     </div>
   </div>
 
